@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
+
 import com.tectoy.sunmiprinter.SunmiPrinter;
 
 
@@ -16,6 +17,7 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
     private SunmiPrinter sunmiPrinter;
 
     private MethodChannel channel;
+
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
         context = binding.getApplicationContext();
@@ -56,12 +58,40 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
             case "getPrintedLength":
                 handleGetPrintedLength(result);
                 break;
-
-                case "cutPaper":
+            case "cutPaper":
                 handleCutPaper(result);
+                break;
+            case "lineWrap":
+                handleLineWrap(call, result);
+                break;
+
+            case "sendRawData":
+                handleSendRawData(call, result);
+                break;
+
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handleSendRawData(MethodCall call, MethodChannel.Result result) {
+        try {
+            byte[] data = call.argument("data");
+            sunmiPrinter.sendRAWData(data);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao enviar dados", e.getMessage(), e);
+        }
+    }
+
+    private void handleLineWrap(MethodCall call, MethodChannel.Result result) {
+        try {
+            int lines = call.argument("numLines");
+            sunmiPrinter.lineWrap(lines);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao pular linha", e.getMessage(), e);
         }
     }
 

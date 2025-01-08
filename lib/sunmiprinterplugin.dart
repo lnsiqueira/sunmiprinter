@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/services.dart';
 
 class SunmiPrinterPlugin {
+  
   static const MethodChannel _channel = MethodChannel('br.com.acbr.exemplo.sunmiprinterplugin');
 
   Future<void> printTeste() async {
@@ -78,6 +79,22 @@ class SunmiPrinterPlugin {
       await _channel.invokeMethod('cutPaper');
     } on PlatformException catch (e) {
       throw 'Error cutting paper: ${e.message}';
+    }
+  }
+
+  Future <void>lineWrap(int numLines) async {
+    try {
+      await _channel.invokeMethod('lineWrap', {"numLines",numLines });
+    } on PlatformException catch (e) {
+      throw 'Error wrapping lines: ${e.message}';
+    }
+  }
+
+  Future<void>sendRAWData(Uint8List data) async {
+    try {
+      await _channel.invokeMethod('sendRAWData', data);
+    } on PlatformException catch (e) {
+      throw 'Error sending RAW data: ${e.message}';
     }
   }
 }
