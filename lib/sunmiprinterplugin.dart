@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/services.dart';
 
 class SunmiPrinterPlugin {
@@ -68,6 +70,14 @@ class SunmiPrinterPlugin {
       await _channel.invokeMethod('getPrintedLength');
     } on PlatformException catch (e) {
       throw 'Error getting printed length: ${e.message}';
+    }
+  }
+
+  Future<void>cutPaper() async {
+    try {
+      await _channel.invokeMethod('cutPaper');
+    } on PlatformException catch (e) {
+      throw 'Error cutting paper: ${e.message}';
     }
   }
 }

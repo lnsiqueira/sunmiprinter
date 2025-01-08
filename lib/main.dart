@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     void onClickButtonImprimirTeste() async {
       await sunmiPrinterPlugin.printTeste();
+      await sunmiPrinterPlugin.cutPaper();
     }
 
 
