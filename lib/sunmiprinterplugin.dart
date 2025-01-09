@@ -97,4 +97,13 @@ class SunmiPrinterPlugin {
       throw 'Error sending RAW data: ${e.message}';
     }
   }
+
+  Future<int> getCutPaperTimes() async {
+    try {
+      final int cutPaperTimes = await _channel.invokeMethod('getCutPaperTimes');
+      return cutPaperTimes;
+    } on PlatformException catch (e) {
+      throw 'Error getting cut paper times: ${e.message}';
+    }
+  }
 }

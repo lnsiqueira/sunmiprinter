@@ -68,7 +68,9 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
             case "sendRawData":
                 handleSendRawData(call, result);
                 break;
-
+            case "getCutPaperTimes":
+                handleGetCutPaperTimes(result);
+                break;
             default:
                 result.notImplemented();
                 break;
@@ -173,6 +175,15 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
             result.success(true);
         } catch (Exception e) {
             result.error("Erro ao obter tamanho impresso", e.getMessage(), e);
+        }
+    }
+
+    private void handleGetCutPaperTimes(@NonNull MethodChannel.Result result) {
+        try {
+            sunmiPrinter.getCutPaperTimes();
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao obter cortes de papel", e.getMessage(), e);
         }
     }
 
