@@ -84,10 +84,82 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
             case "setFontSize":
                 handleSetFontSize(call, result);
                 break;
-                
+            case "printText":
+                handleSetPrintText(call, result);
+                break;
+
+            case "printTextLF":
+                handleSetPrintTextLF(call, result);
+                break;
+            case "printTextWithFont":
+                handleSetPrintTextWithFont(call, result);
+                break;
+
+            case "printColumnsText":
+                handlePrintColumnsText(call, result);
+                break;
+
+            case "printBitmap":
+                handlePrintBitmap(call, result);
+                break;
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handlePrintBitmap(MethodCall call, MethodChannel.Result result) {
+        try {
+            byte[] bitMapData = call.argument("bitmap");
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bitMapData, 0, bitMapData.length);
+            sunmiPrinter.printBitmap(bitmap);
+            result.success(true);
+        }catch (Exception e){
+            result.error("Erro ao imprimir bitmap", e.getMessage(), e);
+        }
+    }
+
+    private void handlePrintColumnsText(MethodCall call, MethodChannel.Result result) {
+        try {
+            String[] columnsText = call.argument("colsTextArr");
+            int[] colsWidthArr = call.argument("colsWidthArr");
+            int[] colsAlign = call.argument("colsAlign");
+            sunmiPrinter.printColumnsText(columnsText, colsWidthArr, colsAlign);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao imprimir texto em colunas", e.getMessage(), e);
+        }
+    }
+
+    private void handleSetPrintTextWithFont(MethodCall call, MethodChannel.Result result) {
+        try {
+            String text = call.argument("text");
+            float fontSize = call.argument("fontSize");
+            String typeface = call.argument("typeface");
+            sunmiPrinter.printTextWithFont(text, typeface,fontSize);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao imprimir texto com fonte", e.getMessage(), e);
+        }
+    }
+
+    private void handleSetPrintTextLF(MethodCall call, MethodChannel.Result result) {
+        try {
+            String text = call.argument("text");
+            sunmiPrinter.printTextLF(text);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao imprimir texto", e.getMessage(), e);
+        }
+    }
+
+    private void handleSetPrintText(MethodCall call, MethodChannel.Result result) {
+        try {
+            String text = call.argument("text");
+            sunmiPrinter.printText(text);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao imprimir texto", e.getMessage(), e);
         }
     }
 

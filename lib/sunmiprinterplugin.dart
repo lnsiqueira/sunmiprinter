@@ -118,11 +118,51 @@ class SunmiPrinterPlugin {
     try {
       await _channel.invokeMethod('setFontSize', {"fontSize",fontSize });
     } on PlatformException catch (e) {
-      throw 'Error setting font size: ${e.message}';
+      throw 'Erro ao configurar o tamanho da fonte: ${e.message}';
     }
   }
-  
 
+  Future<void> printText(String text) async {
+    try {
+      await _channel.invokeMethod('printText', {"text",text });
+    } on PlatformException catch (e) {
+      throw 'Erro ao imprimir texto: ${e.message}';
+    }
+  }
+
+  Future<void> printTextLF(String text) async {
+    try {
+      await _channel.invokeMethod('printTextLF', {"text",text });
+    } on PlatformException catch (e) {
+      throw 'Erro ao imprimir texto com LF: ${e.message}';
+    }
+  }
+
+  Future<void> printTextWithFont(String text, String typeface, Float fontSize) async {
+    try {
+      await _channel.invokeMethod('printTextWithFont', {"text",text, "typeface",typeface, "fontSize",fontSize });
+    } on PlatformException catch (e) {
+      throw 'Erro ao imprimir texto com fonte: ${e.message}';
+    }
+  }
+
+
+  
+  Future<void> printColumnsText(List<String> colsTextArr, List<int> colsWidthArr, List<int> colsAlign) async {
+    try {
+      await _channel.invokeMethod('printColumnsText', {"colsTextArr",colsTextArr, "colsWidthArr",colsWidthArr, "colsAlign",colsAlign });
+    } on PlatformException catch (e) {
+      throw 'Erro ao imprimir colunas de texto: ${e.message}';
+    }
+  }
+
+ Future<void>printBitmap(Uint8List bitmap) async{
+  try {
+      await _channel.invokeMethod('printBitmap', {"bitmap",bitmap });
+    } on PlatformException catch (e) {
+      throw 'Erro ao imprimir bitmap: ${e.message}';
+    }
+  }
   Future<int> getCutPaperTimes() async {
     try {
       final int cutPaperTimes = await _channel.invokeMethod('getCutPaperTimes');
