@@ -62,7 +62,7 @@ class SunmiPrinterPlugin {
       final String modal = await _channel.invokeMethod('getPrinterModal');
       return modal;
     } on PlatformException catch (e) {
-      throw 'Error getting printer modal: ${e.message}';
+      throw 'Erro ao obter o modelo da impressora: ${e.message}';
     }
   }
 
@@ -70,7 +70,7 @@ class SunmiPrinterPlugin {
     try {
       await _channel.invokeMethod('getPrintedLength');
     } on PlatformException catch (e) {
-      throw 'Error getting printed length: ${e.message}';
+      throw 'Erro ao obter o comprimento impresso: ${e.message}';
     }
   }
 
@@ -78,7 +78,7 @@ class SunmiPrinterPlugin {
     try {
       await _channel.invokeMethod('cutPaper');
     } on PlatformException catch (e) {
-      throw 'Error cutting paper: ${e.message}';
+      throw  'Erro ao cortar papel: ${e.message}';
     }
   }
 
@@ -86,7 +86,7 @@ class SunmiPrinterPlugin {
     try {
       await _channel.invokeMethod('lineWrap', {"numLines",numLines });
     } on PlatformException catch (e) {
-      throw 'Error wrapping lines: ${e.message}';
+      throw 'Erro ao saltar linhas: ${e.message}';
     }
   }
 
@@ -94,7 +94,7 @@ class SunmiPrinterPlugin {
     try {
       await _channel.invokeMethod('sendRAWData', data);
     } on PlatformException catch (e) {
-      throw 'Error sending RAW data: ${e.message}';
+      throw 'Erro ao enviar  array de dados: ${e.message}';
     }
   }
 
@@ -102,7 +102,7 @@ class SunmiPrinterPlugin {
     try {
       await _channel.invokeMethod('setAlignment', {"alignment",alignment });
     } on PlatformException catch (e) {
-      throw 'Error setting alignment: ${e.message}';
+      throw 'Erro ao configurar o alinhamento: ${e.message}';
     }
   }
 
@@ -110,7 +110,7 @@ class SunmiPrinterPlugin {
     try {
       await _channel.invokeMethod('setFontName', {"typeface",typeface });
     } on PlatformException catch (e) {
-      throw 'Error setting font name: ${e.message}';
+      throw 'Erro ao configurar o nome da fonte: ${e.message}';
     }
   }
 
