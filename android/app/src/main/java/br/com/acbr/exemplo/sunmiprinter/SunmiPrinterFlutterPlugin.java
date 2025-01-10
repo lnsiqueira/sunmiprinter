@@ -68,12 +68,30 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
             case "sendRawData":
                 handleSendRawData(call, result);
                 break;
+            case "setAlignment":
+                handleSetAlignment(call, result);
+                break;
+            case "setFontName":
+                handleSetFontName(call, result);
+                break;
+
             case "getCutPaperTimes":
                 handleGetCutPaperTimes(result);
                 break;
+
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handleSetAlignment(MethodCall call, MethodChannel.Result result) {
+        try {
+            int alignment = call.argument("alignment");
+            sunmiPrinter.setAlignment(alignment);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao alinhar texto", e.getMessage(), e);
         }
     }
 
@@ -184,6 +202,15 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
             result.success(true);
         } catch (Exception e) {
             result.error("Erro ao obter cortes de papel", e.getMessage(), e);
+        }
+    }
+
+    private void handleSetFontName(MethodCall call, @NonNull MethodChannel.Result result) {
+        try {
+            sunmiPrinter.setFontName(call.argument("typeface"));
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao setar fonte", e.getMessage(), e);
         }
     }
 

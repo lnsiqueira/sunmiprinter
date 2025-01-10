@@ -98,6 +98,22 @@ class SunmiPrinterPlugin {
     }
   }
 
+  Future<void>setAlignment(int alignment) async {
+    try {
+      await _channel.invokeMethod('setAlignment', {"alignment",alignment });
+    } on PlatformException catch (e) {
+      throw 'Error setting alignment: ${e.message}';
+    }
+  }
+
+  Future<void>setFontName(String typeface) async {
+    try {
+      await _channel.invokeMethod('setFontName', {"typeface",typeface });
+    } on PlatformException catch (e) {
+      throw 'Error setting font name: ${e.message}';
+    }
+  }
+
   Future<int> getCutPaperTimes() async {
     try {
       final int cutPaperTimes = await _channel.invokeMethod('getCutPaperTimes');
