@@ -79,9 +79,23 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
                 handleGetCutPaperTimes(result);
                 break;
 
+            case "setFontSize":
+                handleSetFontSize(call, result);
+                break;
+                
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handleSetFontSize(MethodCall call, MethodChannel.Result result) {
+        try {
+            int fontSize = call.argument("fontSize");
+            sunmiPrinter.setFontSize(fontSize);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao setar tamanho da fonte", e.getMessage(), e);
         }
     }
 

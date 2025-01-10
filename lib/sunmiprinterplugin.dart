@@ -114,6 +114,15 @@ class SunmiPrinterPlugin {
     }
   }
 
+  Future<void> setFontSize(Float fontSize) async {
+    try {
+      await _channel.invokeMethod('setFontSize', {"fontSize",fontSize });
+    } on PlatformException catch (e) {
+      throw 'Error setting font size: ${e.message}';
+    }
+  }
+  
+
   Future<int> getCutPaperTimes() async {
     try {
       final int cutPaperTimes = await _channel.invokeMethod('getCutPaperTimes');
