@@ -203,4 +203,20 @@ class SunmiPrinterPlugin {
       throw 'Erro ao confirmar o buffer da impressora: ${e.message}';
     }
   }
+
+  Future<void>enterPrinterBuffer(bool clean) async {
+    try {
+      await _channel.invokeMethod('enterPrinterBuffer', {"clean",clean });
+    } on PlatformException catch (e) {
+      throw 'Erro ao entrar no buffer da impressora: ${e.message}';
+    }
+  }
+
+  Future<void>exitPrinterBuffer(bool commit) async {
+    try {
+      await _channel.invokeMethod('exitPrinterBuffer', {"commit",commit });
+    } on PlatformException catch (e) {
+      throw 'Erro ao sair do buffer da impressora: ${e.message}';
+    }
+  }
 }

@@ -116,13 +116,43 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
                 break;
 
             case "commitPrinterBuffer":
-                    handleCommitPrinterBuffer(result);
-                    break;
+                handleCommitPrinterBuffer(result);
+                break;
+
+            case "enterPrinterBuffer":
+                handleEnterPrinterBuffer(call, result);
+                break;
+
+            case "exitPrinterBuffer":
+                handleExitPrinterBuffer(call, result);
+                break;
+
             default:
                 result.notImplemented();
                 break;
         }
     }
+
+    private void handleExitPrinterBuffer(MethodCall call, MethodChannel.Result result) {
+       try {
+            boolean commit = call.argument("commit");
+            sunmiPrinter.exitPrinterBuffer(commit);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao sair do modo transação de buffer", e.getMessage(), e);
+       }
+    }
+
+    private void handleEnterPrinterBuffer(MethodCall call, MethodChannel.Result result) {
+        try {
+            boolean clean = call.argument("clean");
+            sunmiPrinter.enterPrinterBuffer(clean);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao entrar em modo transação de buffer", e.getMessage(), e);
+        }
+    }
+
 
     private void handleCommitPrinterBuffer(MethodChannel.Result result) {
         try {
