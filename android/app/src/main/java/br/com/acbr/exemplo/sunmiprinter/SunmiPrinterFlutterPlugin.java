@@ -115,9 +115,21 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
                 handlePrintOriginalText(call, result);
                 break;
 
+            case "commitPrinterBuffer":
+                    handleCommitPrinterBuffer(result);
+                    break;
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handleCommitPrinterBuffer(MethodChannel.Result result) {
+        try {
+            sunmiPrinter.commitPrinterBuffer();
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao commitar buffer", e.getMessage(), e);
         }
     }
 

@@ -195,4 +195,12 @@ class SunmiPrinterPlugin {
       throw 'Erro ao imprimir texto original: ${e.message}';
     }
   }
+
+  Future<void>commitPrinterBuffer() async {
+    try {
+      await _channel.invokeMethod('commitPrinterBuffer');
+    } on PlatformException catch (e) {
+      throw 'Erro ao confirmar o buffer da impressora: ${e.message}';
+    }
+  }
 }
