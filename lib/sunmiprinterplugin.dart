@@ -254,4 +254,13 @@ class SunmiPrinterPlugin {
       throw 'Erro ao obter o status mais recente da impressora: ${e.message}';
     }
   }
+
+  Future<int>updatePrinterState() async {
+    try {
+      final int printerState = await _channel.invokeMethod('updatePrinterState');
+      return printerState;
+    } on PlatformException catch (e) {
+      throw 'Erro ao atualizar o estado da impressora: ${e.message}';
+    }
+  }
 }

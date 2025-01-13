@@ -144,9 +144,22 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
                 handleGetPrinterBBMDistance(result);
                 break;
 
+            case "updatePrinterState":
+                handleUpdatePrinterState(result);
+                break;
+
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handleUpdatePrinterState(MethodChannel.Result result) {
+        try {
+            int state = sunmiPrinter.updatePrinterState();
+            result.success(state);
+        }catch (Exception e){
+            result.error("Erro ao atualizar estado da impressora", e.getMessage(), e);
         }
     }
 
