@@ -121,11 +121,11 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
             int height = call.argument("height");
             int width = call.argument("width");
             int textposition = call.argument("textposition");
-            sunmiPrinter.printBarCode(data,symbology,height,width,textposition);
+            sunmiPrinter.printBarCode(data, symbology, height, width, textposition);
             result.success(true);
 
-        }catch (Exception  e){
-           result.error("Erro ao imprimir código de barras", e.getMessage(), e);
+        } catch (Exception e) {
+            result.error("Erro ao imprimir código de barras", e.getMessage(), e);
         }
     }
 
@@ -135,7 +135,7 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
             Bitmap bitmap = BitmapFactory.decodeByteArray(bitMapData, 0, bitMapData.length);
             sunmiPrinter.printBitmap(bitmap);
             result.success(true);
-        }catch (Exception e){
+        } catch (Exception e) {
             result.error("Erro ao imprimir bitmap", e.getMessage(), e);
         }
     }
@@ -157,7 +157,7 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
             String text = call.argument("text");
             float fontSize = call.argument("fontSize");
             String typeface = call.argument("typeface");
-            sunmiPrinter.printTextWithFont(text, typeface,fontSize);
+            sunmiPrinter.printTextWithFont(text, typeface, fontSize);
             result.success(true);
         } catch (Exception e) {
             result.error("Erro ao imprimir texto com fonte", e.getMessage(), e);
