@@ -263,4 +263,13 @@ class SunmiPrinterPlugin {
       throw 'Erro ao atualizar o estado da impressora: ${e.message}';
     }
   }
+
+  Future<bool>getDrawerStatus() async {
+    try {
+      final bool drawerStatus = await _channel.invokeMethod('getDrawerStatus');
+      return drawerStatus;
+    } on PlatformException catch (e) {
+      throw 'Erro ao obter o status da gaveta: ${e.message}';
+    }
+  }
 }

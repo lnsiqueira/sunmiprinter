@@ -148,9 +148,22 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
                 handleUpdatePrinterState(result);
                 break;
 
+            case "getDrawerStatus":
+                handleGetDrawerStatus(result);
+                break;
+
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handleGetDrawerStatus(MethodChannel.Result result) {
+        try {
+            boolean status = sunmiPrinter.getDrawerStatus();
+            result.success(status);
+        } catch (Exception e) {
+            result.error("Erro ao obter status da gaveta", e.getMessage(), e);
         }
     }
 
@@ -158,7 +171,7 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
         try {
             int state = sunmiPrinter.updatePrinterState();
             result.success(state);
-        }catch (Exception e){
+        } catch (Exception e) {
             result.error("Erro ao atualizar estado da impressora", e.getMessage(), e);
         }
     }
