@@ -219,4 +219,12 @@ class SunmiPrinterPlugin {
       throw 'Erro ao sair do buffer da impressora: ${e.message}';
     }
   }
+
+  Future<void>openDrawer() async {
+    try {
+      await _channel.invokeMethod('openDrawer');
+    } on PlatformException catch (e) {
+      throw 'Erro ao abrir a gaveta: ${e.message}';
+    }
+  }
 }

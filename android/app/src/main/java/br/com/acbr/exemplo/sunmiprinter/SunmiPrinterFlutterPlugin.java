@@ -127,20 +127,33 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
                 handleExitPrinterBuffer(call, result);
                 break;
 
+            case "openDrawer":
+                handleOpenDrawer(result);
+                break;
+
             default:
                 result.notImplemented();
                 break;
         }
     }
 
+    private void handleOpenDrawer(MethodChannel.Result result) {
+        try {
+            sunmiPrinter.openDrawer();
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao abrir gaveta", e.getMessage(), e);
+        }
+    }
+
     private void handleExitPrinterBuffer(MethodCall call, MethodChannel.Result result) {
-       try {
+        try {
             boolean commit = call.argument("commit");
             sunmiPrinter.exitPrinterBuffer(commit);
             result.success(true);
         } catch (Exception e) {
             result.error("Erro ao sair do modo transação de buffer", e.getMessage(), e);
-       }
+        }
     }
 
     private void handleEnterPrinterBuffer(MethodCall call, MethodChannel.Result result) {
