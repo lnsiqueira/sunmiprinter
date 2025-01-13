@@ -131,9 +131,22 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
                 handleOpenDrawer(result);
                 break;
 
+            case "getOpenDrawerTimes":
+                handleGetOpenDrawerTimes(result);
+                break;
+
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handleGetOpenDrawerTimes(MethodChannel.Result result) {
+        try {
+            sunmiPrinter.getOpenDrawerTimes();
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao quantas vez a gaveta foi aberta", e.getMessage(), e);
         }
     }
 

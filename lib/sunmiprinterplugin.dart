@@ -227,4 +227,13 @@ class SunmiPrinterPlugin {
       throw 'Erro ao abrir a gaveta: ${e.message}';
     }
   }
+
+  Future<int>getOpenDrawerTimes() async {
+    try {
+      final int openDrawerTimes = await _channel.invokeMethod('getOpenDrawerTimes');
+      return openDrawerTimes;
+    } on PlatformException catch (e) {
+      throw 'Erro ao obter o número de vezes que a gaveta foi aberta: ${e.message}';
+    }
+  }
 }
