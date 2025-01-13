@@ -102,9 +102,30 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
             case "printBitmap":
                 handlePrintBitmap(call, result);
                 break;
+
+            case "printBarCode":
+                handlePrintBarCode(call, result);
+                break;
+
+
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handlePrintBarCode(MethodCall call, MethodChannel.Result result) {
+        try {
+            String data = call.argument("data");
+            int symbology = call.argument("symbology");
+            int height = call.argument("height");
+            int width = call.argument("width");
+            int textposition = call.argument("textposition");
+            sunmiPrinter.printBarCode(data,symbology,height,width,textposition);
+            result.success(true);
+
+        }catch (Exception  e){
+           result.error("Erro ao imprimir código de barras", e.getMessage(), e);
         }
     }
 

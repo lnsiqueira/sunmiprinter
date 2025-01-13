@@ -171,4 +171,12 @@ class SunmiPrinterPlugin {
       throw 'Error getting cut paper times: ${e.message}';
     }
   }
+
+  Future<void>printBarCode(String data, int symbology, int height, int width, int textPosition) async {
+    try {
+      await _channel.invokeMethod('printBarCode', {"data",data, "symbology",symbology, "height",height, "width",width, "textPosition",textPosition });
+    } on PlatformException catch (e) {
+      throw 'Erro ao imprimir código de barras: ${e.message}';
+    }
+  }
 }
