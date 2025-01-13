@@ -111,10 +111,23 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
                 handlePrintQRCode(call, result);
                 break;
 
+            case "printOriginalText":
+                handlePrintOriginalText(call, result);
+                break;
 
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handlePrintOriginalText(MethodCall call, MethodChannel.Result result) {
+        try {
+            String text = call.argument("text");
+            sunmiPrinter.printOriginalText(text);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao imprimir texto original", e.getMessage(), e);
         }
     }
 

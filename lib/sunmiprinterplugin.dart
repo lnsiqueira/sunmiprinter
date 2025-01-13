@@ -187,4 +187,12 @@ class SunmiPrinterPlugin {
       throw 'Erro ao imprimir código QR: ${e.message}';
     }
   }
+
+  Future<void>printOriginalText(String text) async {
+    try {
+      await _channel.invokeMethod('printOriginalText', {"text",text });
+    } on PlatformException catch (e) {
+      throw 'Erro ao imprimir texto original: ${e.message}';
+    }
+  }
 }
