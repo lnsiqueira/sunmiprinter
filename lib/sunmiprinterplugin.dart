@@ -179,4 +179,12 @@ class SunmiPrinterPlugin {
       throw 'Erro ao imprimir código de barras: ${e.message}';
     }
   }
+
+  Future<void>printQRCode(String data, int moduleSize, int errorLevel) async {
+    try {
+      await _channel.invokeMethod('printQRCode', {"data",data, "moduleSize",moduleSize, "errorLevel",errorLevel });
+    } on PlatformException catch (e) {
+      throw 'Erro ao imprimir código QR: ${e.message}';
+    }
+  }
 }

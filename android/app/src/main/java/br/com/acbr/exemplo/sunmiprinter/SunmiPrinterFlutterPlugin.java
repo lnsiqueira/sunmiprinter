@@ -107,10 +107,26 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
                 handlePrintBarCode(call, result);
                 break;
 
+            case "printQRCode":
+                handlePrintQRCode(call, result);
+                break;
+
 
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handlePrintQRCode(MethodCall call, MethodChannel.Result result) {
+        try {
+            String data = call.argument("data");
+            int modulesize = call.argument("modulesize");
+            int errorlevel = call.argument("errorlevel");
+            sunmiPrinter.printQRCode(data, modulesize, errorlevel);
+            result.success(true);
+        } catch (Exception e) {
+            result.error("Erro ao imprimir QRCode", e.getMessage(), e);
         }
     }
 
