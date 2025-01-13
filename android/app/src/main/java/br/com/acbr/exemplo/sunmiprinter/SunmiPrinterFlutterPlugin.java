@@ -135,9 +135,36 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
                 handleGetOpenDrawerTimes(result);
                 break;
 
+
+            case "getPrinterMode":
+                handleGetPrinterMode(result);
+                break;
+
+            case "getPrinterBBMDistance":
+                handleGetPrinterBBMDistance(result);
+                break;
+
             default:
                 result.notImplemented();
                 break;
+        }
+    }
+
+    private void handleGetPrinterBBMDistance(MethodChannel.Result result) {
+        try {
+            int distance = sunmiPrinter.getPrinterBBMDistance();
+            result.success(distance);
+        } catch (Exception e) {
+            result.error("Erro ao obter o status mais recente da impressora", e.getMessage(), e);
+        }
+    }
+
+    private void handleGetPrinterMode(MethodChannel.Result result) {
+        try {
+            int mode = sunmiPrinter.getPrinterMode();
+            result.success(mode);
+        } catch (Exception e) {
+            result.error("Erro ao obter modo da impressora", e.getMessage(), e);
         }
     }
 

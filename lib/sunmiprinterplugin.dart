@@ -236,4 +236,22 @@ class SunmiPrinterPlugin {
       throw 'Erro ao obter o número de vezes que a gaveta foi aberta: ${e.message}';
     }
   }
+
+  Future<int>getPrinterMode() async {
+    try {
+      final int printerMode = await _channel.invokeMethod('getPrinterMode');
+      return printerMode;
+    } on PlatformException catch (e) {
+      throw 'Erro ao obter o modo da impressora: ${e.message}';
+    }
+  }
+
+  Future<int>getPrinterBBMDistance() async {
+    try {
+      final int printerBBMDistance = await _channel.invokeMethod('getPrinterBBMDistance');
+      return printerBBMDistance;
+    } on PlatformException catch (e) {
+      throw 'Erro ao obter o status mais recente da impressora: ${e.message}';
+    }
+  }
 }
