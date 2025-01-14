@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:flutter/services.dart';
 
 class SunmiPrinterPlugin {
@@ -84,7 +83,7 @@ class SunmiPrinterPlugin {
 
   Future <void>lineWrap(int numLines) async {
     try {
-      await _channel.invokeMethod('lineWrap', {"numLines",numLines });
+      await _channel.invokeMethod('lineWrap', {"numLines":numLines });
     } on PlatformException catch (e) {
       throw 'Erro ao saltar linhas: ${e.message}';
     }
@@ -100,7 +99,7 @@ class SunmiPrinterPlugin {
 
   Future<void>setAlignment(int alignment) async {
     try {
-      await _channel.invokeMethod('setAlignment', {"alignment",alignment });
+      await _channel.invokeMethod('setAlignment', {"alignment":alignment });
     } on PlatformException catch (e) {
       throw 'Erro ao configurar o alinhamento: ${e.message}';
     }
@@ -108,7 +107,7 @@ class SunmiPrinterPlugin {
 
   Future<void>setFontName(String typeface) async {
     try {
-      await _channel.invokeMethod('setFontName', {"typeface",typeface });
+      await _channel.invokeMethod('setFontName', {"typeface":typeface });
     } on PlatformException catch (e) {
       throw 'Erro ao configurar o nome da fonte: ${e.message}';
     }
@@ -116,7 +115,7 @@ class SunmiPrinterPlugin {
 
   Future<void> setFontSize(Float fontSize) async {
     try {
-      await _channel.invokeMethod('setFontSize', {"fontSize",fontSize });
+      await _channel.invokeMethod('setFontSize', {"fontSize":fontSize });
     } on PlatformException catch (e) {
       throw 'Erro ao configurar o tamanho da fonte: ${e.message}';
     }
@@ -124,7 +123,7 @@ class SunmiPrinterPlugin {
 
   Future<void> printText(String text) async {
     try {
-      await _channel.invokeMethod('printText', {"text",text });
+      await _channel.invokeMethod('printText', {"text":text });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir texto: ${e.message}';
     }
@@ -132,7 +131,7 @@ class SunmiPrinterPlugin {
 
   Future<void> printTextLF(String text) async {
     try {
-      await _channel.invokeMethod('printTextLF', {"text",text });
+      await _channel.invokeMethod('printTextLF', {"text":text });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir texto com LF: ${e.message}';
     }
@@ -140,7 +139,7 @@ class SunmiPrinterPlugin {
 
   Future<void> printTextWithFont(String text, String typeface, Float fontSize) async {
     try {
-      await _channel.invokeMethod('printTextWithFont', {"text",text, "typeface",typeface, "fontSize",fontSize });
+      await _channel.invokeMethod('printTextWithFont', {"text":text, "typeface":typeface, "fontSize":fontSize });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir texto com fonte: ${e.message}';
     }
@@ -150,7 +149,7 @@ class SunmiPrinterPlugin {
   
   Future<void> printColumnsText(List<String> colsTextArr, List<int> colsWidthArr, List<int> colsAlign) async {
     try {
-      await _channel.invokeMethod('printColumnsText', {"colsTextArr",colsTextArr, "colsWidthArr",colsWidthArr, "colsAlign",colsAlign });
+      await _channel.invokeMethod('printColumnsText', {"colsTextArr":colsTextArr, "colsWidthArr":colsWidthArr, "colsAlign":colsAlign });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir colunas de texto: ${e.message}';
     }
@@ -158,7 +157,7 @@ class SunmiPrinterPlugin {
 
  Future<void>printBitmap(Uint8List bitmap) async{
   try {
-      await _channel.invokeMethod('printBitmap', {"bitmap",bitmap });
+      await _channel.invokeMethod('printBitmap', {"bitmap":bitmap });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir bitmap: ${e.message}';
     }
@@ -174,7 +173,7 @@ class SunmiPrinterPlugin {
 
   Future<void>printBarCode(String data, int symbology, int height, int width, int textPosition) async {
     try {
-      await _channel.invokeMethod('printBarCode', {"data",data, "symbology",symbology, "height",height, "width",width, "textPosition",textPosition });
+      await _channel.invokeMethod('printBarCode',{ "data":data, "symbology":symbology, "height":height, "width":width, "textPosition":textPosition });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir código de barras: ${e.message}';
     }
@@ -182,7 +181,7 @@ class SunmiPrinterPlugin {
 
   Future<void>printQRCode(String data, int moduleSize, int errorLevel) async {
     try {
-      await _channel.invokeMethod('printQRCode', {"data",data, "moduleSize",moduleSize, "errorLevel",errorLevel });
+      await _channel.invokeMethod('printQRCode', {"data":data, "modulesize":moduleSize, "errorlevel":errorLevel });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir código QR: ${e.message}';
     }
@@ -190,7 +189,7 @@ class SunmiPrinterPlugin {
 
   Future<void>printOriginalText(String text) async {
     try {
-      await _channel.invokeMethod('printOriginalText', {"text",text });
+      await _channel.invokeMethod('printOriginalText', {"text":text });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir texto original: ${e.message}';
     }
@@ -206,7 +205,7 @@ class SunmiPrinterPlugin {
 
   Future<void>enterPrinterBuffer(bool clean) async {
     try {
-      await _channel.invokeMethod('enterPrinterBuffer', {"clean",clean });
+      await _channel.invokeMethod('enterPrinterBuffer', {"clean":clean });
     } on PlatformException catch (e) {
       throw 'Erro ao entrar no buffer da impressora: ${e.message}';
     }
@@ -214,7 +213,7 @@ class SunmiPrinterPlugin {
 
   Future<void>exitPrinterBuffer(bool commit) async {
     try {
-      await _channel.invokeMethod('exitPrinterBuffer', {"commit",commit });
+      await _channel.invokeMethod('exitPrinterBuffer', {"commit":commit });
     } on PlatformException catch (e) {
       throw 'Erro ao sair do buffer da impressora: ${e.message}';
     }

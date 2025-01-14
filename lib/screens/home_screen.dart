@@ -21,26 +21,31 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.cutPaper();
     }
 
+    void onClickButtonImprimirQrCode() async {
+      String qrCode = "aHR0cHM6Ly9wcm9qZXRvYWNici5jb20uYnIK";
+      await sunmiPrinterPlugin.printQRCode(qrCode,4,1);
+      await sunmiPrinterPlugin.cutPaper();
+    }
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
             CustomButton(
               text: "Imprimir Teste",
               onPressed: onClickButtonImprimirTeste,
               icon: Icon(Icons.print),
             ),
 
+            CustomButton(
+                text: "Imprimir QrCode",
+                onPressed: onClickButtonImprimirQrCode,
+                icon: Icon(Icons.qr_code)),
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
