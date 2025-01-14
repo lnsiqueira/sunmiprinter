@@ -16,14 +16,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final sunmiPrinterPlugin = SunmiPrinterPlugin();
 
+    void onClickButtonImprimirCodigoDeBarras() async {
+      await sunmiPrinterPlugin.printBarCode("1234567890", 8, 100, 2,1);
+      await sunmiPrinterPlugin.cutPaper();
+    }
+
     void onClickButtonImprimirTeste() async {
       await sunmiPrinterPlugin.printTeste();
       await sunmiPrinterPlugin.cutPaper();
     }
 
     void onClickButtonImprimirQrCode() async {
-      String qrCode = "aHR0cHM6Ly9wcm9qZXRvYWNici5jb20uYnIK";
-      await sunmiPrinterPlugin.printQRCode(qrCode,4,1);
+      String qrCode =
+          "Projeto ACBr Consultoria S.A\nhttps://www.projetoacbr.com.br";
+      await sunmiPrinterPlugin.printQRCode(qrCode, 8, 1);
       await sunmiPrinterPlugin.cutPaper();
     }
 
@@ -41,11 +47,16 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: onClickButtonImprimirTeste,
               icon: Icon(Icons.print),
             ),
-
             CustomButton(
                 text: "Imprimir QrCode",
                 onPressed: onClickButtonImprimirQrCode,
                 icon: Icon(Icons.qr_code)),
+
+            CustomButton(
+                text: "Imprimir Código de Barras",
+                onPressed: onClickButtonImprimirCodigoDeBarras,
+                icon: Icon(Icons.bar_chart)
+            )
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
