@@ -1,4 +1,5 @@
 import 'package:demosunmiprinter/sunmiprinterplugin.dart';
+import 'package:demosunmiprinter/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -34,24 +35,11 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
 
-            MaterialButton(
+            CustomButton(
+              text: "Imprimir Teste",
               onPressed: onClickButtonImprimirTeste,
-              child: Text("Imprimir Teste"),
-              color: Theme
-                  .of(context)
-                  .colorScheme
-                  .primary,
-              textColor: Theme
-                  .of(context)
-                  .colorScheme
-                  .onPrimary,
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              // gere um botao que imprima um qr code
             ),
+
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
