@@ -24,9 +24,10 @@ class  CustomButton extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
 
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(25.0),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           icon,
