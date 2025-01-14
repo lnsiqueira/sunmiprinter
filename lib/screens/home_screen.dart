@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
             CustomButton(
               text: "Imprimir Teste",
               onPressed: onClickButtonImprimirTeste,
+              icon: Icon(Icons.print),
             ),
 
           ],

@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 class  CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback  onPressed;
+  final Icon icon;
 
-  CustomButton({required this.text,  required this.onPressed});
+  CustomButton({required this.text,  required this.onPressed, required this.icon});
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: onPressed,
-      child: Text(text),
       color: Theme
           .of(context)
           .colorScheme
@@ -25,6 +25,13 @@ class  CustomButton extends StatelessWidget {
 
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          icon,
+          Text(text),
+        ],
       ),
     );
   }
