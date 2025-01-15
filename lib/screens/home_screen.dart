@@ -27,22 +27,27 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     void onClickButtonImprimirTeste() async {
-      await sunmiPrinterPlugin.setFontSize(10.0);
-      await sunmiPrinterPlugin.printText("Texto com fonte de tamanho 10\n");
       await sunmiPrinterPlugin.setFontSize(20.0);
-      await sunmiPrinterPlugin.printText("Texto com fonte de tamanho 20\n");
+      await sunmiPrinterPlugin.printText("Texto sem quebra de linha ");
+      await sunmiPrinterPlugin.printText("Outro texto sem quebra de linha\n");
+      await sunmiPrinterPlugin.setFontSize(15.0);
+      await sunmiPrinterPlugin.printTextLF("Texto com fonte de tamanho 15");
+      await sunmiPrinterPlugin.setFontSize(20.0);
+      await sunmiPrinterPlugin.printTextLF("Texto com fonte de tamanho 20");
       await sunmiPrinterPlugin.setFontSize(30.0);
-      await sunmiPrinterPlugin.printText("Texto com fonte de tamanho 30\n");
+      await sunmiPrinterPlugin.printTextLF("Texto com fonte de tamanho 30");
+
+      await sunmiPrinterPlugin.setFontSize(20.0);
 
       await sunmiPrinterPlugin.setAlignment(1);
-      await sunmiPrinterPlugin.printText("Texto centralizado\n");
+      await sunmiPrinterPlugin.printTextLF("Texto centralizado");
       await sunmiPrinterPlugin.setAlignment(2);
-      await sunmiPrinterPlugin.printText("Texto alinhado à direita\n");
+      await sunmiPrinterPlugin.printTextLF("Texto alinhado à direita");
       await sunmiPrinterPlugin.setAlignment(0);
-      await sunmiPrinterPlugin.printText("Texto alinhado à esquerda\n");
+      await sunmiPrinterPlugin.printTextLF("Texto alinhado à esquerda");
+      await sunmiPrinterPlugin.printTextLF("Pulei uma linha");
+      await sunmiPrinterPlugin.lineWrap(1);
       await sunmiPrinterPlugin.cutPaper();
-
-
     }
 
     void onClickButtonImprimirQrCode() async {
