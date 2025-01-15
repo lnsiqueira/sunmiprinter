@@ -86,6 +86,9 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Corta o papel
+   */
   Future<void>cutPaper() async {
     try {
       await _channel.invokeMethod('cutPaper');
@@ -94,6 +97,10 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Pula linhas
+   * @param numLines - número de linhas a serem puladas
+   */
   Future <void>lineWrap(int numLines) async {
     try {
       await _channel.invokeMethod('lineWrap', {"numLines":numLines });
@@ -102,6 +109,10 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Envia dados brutos para a impressora
+   * @param data - array de bytes
+   */
   Future<void>sendRAWData(Uint8List data) async {
     try {
       await _channel.invokeMethod('sendRAWData', data);
@@ -110,6 +121,13 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Seta o alinhamento do texto
+   * @param alignment
+   * 0 - Esquerda
+   * 1  - Centro
+   * 2 - Direita
+   */
   Future<void>setAlignment(int alignment) async {
     try {
       await _channel.invokeMethod('setAlignment', {"alignment":alignment });
@@ -118,6 +136,10 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Seta o nome da fonte
+   * @param typeface - nome da fonte
+   */
   Future<void>setFontName(String typeface) async {
     try {
       await _channel.invokeMethod('setFontName', {"typeface":typeface });
@@ -126,6 +148,10 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Seta o tamanho da Fonte
+   * @param fontSize - tamanho da fonte
+   */
   Future<void> setFontSize(double fontSize) async {
     try {
       await _channel.invokeMethod('setFontSize', {"fontSize":fontSize });
@@ -134,6 +160,10 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Imprime um Texto
+   * @param text
+   */
   Future<void> printText(String text) async {
     try {
       await _channel.invokeMethod('printText', {"text":text });
@@ -142,6 +172,10 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   *Imprime um Texto com quebra de linha (\n)
+   * @param text
+   */
   Future<void> printTextLF(String text) async {
     try {
       await _channel.invokeMethod('printTextLF', {"text":text });
@@ -150,6 +184,12 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Imprime um texto com uma fonte e tamanho específicos
+   * @param text  - texto a ser impresso
+   * @param typeface - nome da fonte
+   * @param fontSize - tamanho da fonte
+   */
   Future<void> printTextWithFont(String text, String typeface, double fontSize) async {
     try {
       await _channel.invokeMethod('printTextWithFont', {"text":text, "typeface":typeface, "fontSize":fontSize });
@@ -168,6 +208,10 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Imprime um Bitmap
+   * @param bitmap um array (Uint8List é um byte[] em Java) com os dados da imagem
+   */
  Future<void>printBitmap(Uint8List bitmap) async{
   try {
       await _channel.invokeMethod('printBitmap', {"bitmap":bitmap });
@@ -184,6 +228,23 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Imprime Código de Barras
+   * @param data
+   * @param symbology
+   *  0 - UPC-A
+   *  1 - UPC-E，
+   *  2 - JAN13(EAN13)
+   *  3 - JAN8(EAN8)
+   *  4 - CODE39，
+   *  5 - ITF，
+   *  6 - CODABAR，
+   *  7 - CODE93，
+   *  8 - CODE128
+   * @param height - Altura do código de barras, o valor é de 1 a 255, o padrão = 162
+   * @param width - Largura do código de barras, intervalo de 2 a 6, padrão = 2
+   * @param textPosition  - Posição do texto Padrão = 2
+   */
   Future<void>printBarCode(String data, int symbology, int height, int width, int textPosition) async {
     try {
       await _channel.invokeMethod('printBarCode',{ "data":data, "symbology":symbology, "height":height, "width":width, "textposition":textPosition });
@@ -192,6 +253,12 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Imprime Código QR
+   * @param data - Dados do código QR
+   * @param moduleSize - Tamanho do módulo, o valor é de 1 a 16,
+   * @param errorLevel - Nível de correção de erro, o valor é de 1 a 4
+   */
   Future<void>printQRCode(String data, int moduleSize, int errorLevel) async {
     try {
       await _channel.invokeMethod('printQRCode', {"data":data, "modulesize":moduleSize, "errorlevel":errorLevel });
@@ -285,6 +352,10 @@ class SunmiPrinterPlugin {
     }
   }
 
+  /**
+   * Obtem o estado da impressora
+   * @return SunmiPrinterState
+   */
   Future<SunmiPrinterState> getPrinterState() async {
     try {
       final int printerState = await updatePrinterState() as int;
