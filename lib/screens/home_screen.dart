@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -21,6 +20,45 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final sunmiPrinterPlugin = SunmiPrinterPlugin();
+
+    String buildMensagemDeEstadoDaImpressora(
+        SunmiPrinterState estadoImpressora) {
+      String mensagem = "";
+
+      switch (estadoImpressora) {
+        case SunmiPrinterState.OK:
+          mensagem = "Impressora OK";
+          break;
+        case SunmiPrinterState.INITIALIZING:
+          mensagem = "Inicializando impressora";
+          break;
+        case SunmiPrinterState.ERROR:
+          mensagem = "Erro na impressora";
+          break;
+        case SunmiPrinterState.OUTOFPAPER:
+          mensagem = "Sem papel";
+          break;
+        case SunmiPrinterState.OVERHEATED:
+          mensagem = "Impressora superaquecida";
+          break;
+        case SunmiPrinterState.COVERISOPEN:
+          mensagem = "Tampa aberta";
+          break;
+        case SunmiPrinterState.CUTTERABNORMAL:
+          mensagem = "Cortador anormal";
+          break;
+        case SunmiPrinterState.CUTTERNORMAL:
+          mensagem = "Cortador normal";
+          break;
+        case SunmiPrinterState.BLACKMARKNOTFOUND:
+          mensagem = "Marcador preto não encontrado";
+          break;
+        case SunmiPrinterState.PRINTERNOTDETECTED:
+          mensagem = "Impressora não detectada";
+          break;
+      }
+      return mensagem;
+    }
 
     void onClickButtonImprimirCodigoDeBarras() async {
       await sunmiPrinterPlugin.printBarCode("1234567890", 8, 100, 2, 1);
@@ -66,44 +104,16 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.printText("Exemplo de impressão de imagem\n");
       await sunmiPrinterPlugin.printBitmap(data.buffer.asUint8List());
       await sunmiPrinterPlugin.printText("\n");
-      await sunmiPrinterPlugin.cutPaper();
     }
 
     void onClickButtonEstadoImpressora() async {
       final estadoImpressora = await sunmiPrinterPlugin.getPrinterState();
       String mensagem = "";
 
-      switch (estadoImpressora) {
-        case SunmiPrinterState.OK:
-          mensagem = "Impressora OK";
-          break;
-        case SunmiPrinterState.INITIALIZING:
-          mensagem = "Inicializando impressora";
-          break;
-        case SunmiPrinterState.ERROR:
-          mensagem = "Erro na impressora";
-          break;
-        case SunmiPrinterState.OUTOFPAPER:
-          mensagem = "Sem papel";
-          break;
-        case SunmiPrinterState.OVERHEATED:
-          mensagem = "Impressora superaquecida";
-          break;
-        case SunmiPrinterState.COVERISOPEN:
-          mensagem = "Tampa aberta";
-          break;
-        case SunmiPrinterState.CUTTERABNORMAL:
-          mensagem = "Cortador anormal";
-          break;
-        case SunmiPrinterState.CUTTERNORMAL:
-          mensagem = "Cortador normal";
-          break;
-        case SunmiPrinterState.BLACKMARKNOTFOUND:
-          mensagem = "Marcador preto não encontrado";
-          break;
-        case SunmiPrinterState.PRINTERNOTDETECTED:
-          mensagem = "Impressora não detectada";
-          break;
+      if (estadoImpressora != null) {
+        mensagem = buildMensagemDeEstadoDaImpressora(estadoImpressora);
+      } else {
+        mensagem = "Erro ao obter o estado da impressora";
       }
       Fluttertoast.showToast(
           msg: mensagem,
