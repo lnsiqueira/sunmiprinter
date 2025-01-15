@@ -23,7 +23,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     void onClickButtonImprimirTeste() async {
-      await sunmiPrinterPlugin.printTeste();
+      await sunmiPrinterPlugin.setFontSize(10.0);
+      await sunmiPrinterPlugin.printText("Texto com fonte de tamanho 10\n");
+      await sunmiPrinterPlugin.setFontSize(20.0);
+      await sunmiPrinterPlugin.printText("Texto com fonte de tamanho 20\n");
+      await sunmiPrinterPlugin.setFontSize(30.0);
+      await sunmiPrinterPlugin.printText("Texto com fonte de tamanho 30\n");
       await sunmiPrinterPlugin.cutPaper();
     }
 
