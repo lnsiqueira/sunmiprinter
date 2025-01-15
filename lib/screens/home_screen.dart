@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:demosunmiprinter/sunmiprinterplugin.dart';
 import 'package:demosunmiprinter/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
