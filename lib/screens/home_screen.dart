@@ -1,7 +1,13 @@
+import 'dart:ffi';
+
 import 'package:demosunmiprinter/sunmiprinterplugin.dart';
 import 'package:demosunmiprinter/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../utils/sunmiprinterstate.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -45,7 +51,49 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.printText("Exemplo de impressão de imagem\n");
       await sunmiPrinterPlugin.printBitmap(data.buffer.asUint8List());
       await sunmiPrinterPlugin.printText("\n");
-      await sunmiPrinterPlugin.cutPaper();  
+      await sunmiPrinterPlugin.cutPaper();
+    }
+
+    void onClickButtonEstadoImpressora() async {
+      final estadoImpressora = await sunmiPrinterPlugin.getPrinterState();
+      String mensagem = "";
+
+      switch (estadoImpressora) {
+        case SunmiPrinterState.OK:
+          mensagem = "Impressora OK";
+          break;
+        case SunmiPrinterState.INITIALIZING:
+          mensagem = "Inicializando impressora";
+          break;
+        case SunmiPrinterState.ERROR:
+          mensagem = "Erro na impressora";
+          break;
+        case SunmiPrinterState.OUTOFPAPER:
+          mensagem = "Sem papel";
+          break;
+        case SunmiPrinterState.OVERHEATED:
+          mensagem = "Impressora superaquecida";
+          break;
+        case SunmiPrinterState.COVERISOPEN:
+          mensagem = "Tampa aberta";
+          break;
+        case SunmiPrinterState.CUTTERABNORMAL:
+          mensagem = "Cortador anormal";
+          break;
+        case SunmiPrinterState.CUTTERNORMAL:
+          mensagem = "Cortador normal";
+          break;
+        case SunmiPrinterState.BLACKMARKNOTFOUND:
+          mensagem = "Marcador preto não encontrado";
+          break;
+        case SunmiPrinterState.PRINTERNOTDETECTED:
+          mensagem = "Impressora não detectada";
+          break;
+      }
+      Fluttertoast.showToast(
+          msg: mensagem,
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM);
     }
 
     return Scaffold(
@@ -74,6 +122,10 @@ class _MyHomePageState extends State<MyHomePage> {
             CustomButton(
                 onPressed: onClickButtonImprimirImagem,
                 icon: Icon(Icons.image)),
+            Text("Estado da impressora"),
+            CustomButton(
+                onPressed: onClickButtonEstadoImpressora,
+                icon: Icon(Icons.print)),
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
