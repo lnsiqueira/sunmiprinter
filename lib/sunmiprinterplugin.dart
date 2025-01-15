@@ -1,9 +1,22 @@
 import 'dart:ffi';
+import 'dart:ui';
+import 'package:demosunmiprinter/utils/sunmiprinterstate.dart';
 import 'package:flutter/services.dart';
-
+import 'dart:developer' as developer;
 class SunmiPrinterPlugin {
-  
+
   static const MethodChannel _channel = MethodChannel('br.com.acbr.exemplo.sunmiprinterplugin');
+
+  static const int SUNMI_PRINTERSTATUS_OK = 1;
+  static const int SUNMI_PRINTERSTATUS_INITIALIZING = 2;
+  static const int SUNMI_PRINTERSTATUS_ERROR = 3;
+  static const int SUNMI_PRINTERSTATUS_OUT_OF_PAPER = 4;
+  static const int SUNMI_PRINTERSTATUS_OVERHEATED = 5;
+  static const int SUNMI_PRINTERSTATUS_COVER_IS_OPEN = 6;
+  static const int SUNMI_PRINTERSTATUS_CUTTER_ABNORMAL = 7;
+  static const int SUNMI_PRINTERSTATUS_CUTTER_NORMAL = 8;
+  static const int SUNMI_PRINTERSTATUS_BLACK_MARK_NOT_FOUND = 9;
+  static const int SUNMI_PRINTERSTATUS_PRINTER_NOT_DETECTED = 505;
 
   Future<void> printTeste() async {
     try {
@@ -146,7 +159,7 @@ class SunmiPrinterPlugin {
   }
 
 
-  
+
   Future<void> printColumnsText(List<String> colsTextArr, List<int> colsWidthArr, List<int> colsAlign) async {
     try {
       await _channel.invokeMethod('printColumnsText', {"colsTextArr":colsTextArr, "colsWidthArr":colsWidthArr, "colsAlign":colsAlign });
@@ -269,6 +282,51 @@ class SunmiPrinterPlugin {
       return drawerStatus;
     } on PlatformException catch (e) {
       throw 'Erro ao obter o status da gaveta: ${e.message}';
+    }
+  }
+
+  Future<SunmiPrinterState> getPrinterState() async {
+    try {
+      final int printerState = await updatePrinterState() as int;
+      SunmiPrinterState state;
+      switch (printerState) {
+        case SUNMI_PRINTERSTATUS_OK:
+          state = SunmiPrinterState.OK;
+          break;
+        case SUNMI_PRINTERSTATUS_INITIALIZING:
+          state = SunmiPrinterState.INITIALIZING;
+          break;
+        case SUNMI_PRINTERSTATUS_ERROR:
+          state = SunmiPrinterState.ERROR;
+          break;
+        case SUNMI_PRINTERSTATUS_OUT_OF_PAPER:
+          state = SunmiPrinterState.OUTOFPAPER;
+          break;
+        case SUNMI_PRINTERSTATUS_OVERHEATED:
+          state = SunmiPrinterState.OVERHEATED;
+          break;
+        case SUNMI_PRINTERSTATUS_COVER_IS_OPEN:
+          state = SunmiPrinterState.COVERISOPEN;
+          break;
+        case SUNMI_PRINTERSTATUS_CUTTER_ABNORMAL:
+          state = SunmiPrinterState.CUTTERABNORMAL;
+          break;
+        case SUNMI_PRINTERSTATUS_CUTTER_NORMAL:
+          state = SunmiPrinterState.CUTTERNORMAL;
+          break;
+        case SUNMI_PRINTERSTATUS_BLACK_MARK_NOT_FOUND:
+          state = SunmiPrinterState.BLACKMARKNOTFOUND;
+          break;
+        case SUNMI_PRINTERSTATUS_PRINTER_NOT_DETECTED:
+          state = SunmiPrinterState.PRINTERNOTDETECTED;
+          break;
+        default:
+          state = SunmiPrinterState.ERROR;
+          break;
+      }
+      return state;
+    } on PlatformException catch (e) {
+      throw 'Erro ao obter o estado da impressora: ${e.message}';
     }
   }
 }
