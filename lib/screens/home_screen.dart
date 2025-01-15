@@ -35,7 +35,16 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.printText("Texto com fonte de tamanho 20\n");
       await sunmiPrinterPlugin.setFontSize(30.0);
       await sunmiPrinterPlugin.printText("Texto com fonte de tamanho 30\n");
+
+      await sunmiPrinterPlugin.setAlignment(1);
+      await sunmiPrinterPlugin.printText("Texto centralizado\n");
+      await sunmiPrinterPlugin.setAlignment(2);
+      await sunmiPrinterPlugin.printText("Texto alinhado à direita\n");
+      await sunmiPrinterPlugin.setAlignment(0);
+      await sunmiPrinterPlugin.printText("Texto alinhado à esquerda\n");
       await sunmiPrinterPlugin.cutPaper();
+
+
     }
 
     void onClickButtonImprimirQrCode() async {
