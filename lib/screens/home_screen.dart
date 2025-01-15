@@ -27,9 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     void onClickButtonImprimirTeste() async {
-      await sunmiPrinterPlugin.setFontSize(20.0);
-      await sunmiPrinterPlugin.printText("Texto sem quebra de linha ");
-      await sunmiPrinterPlugin.printText("Outro texto sem quebra de linha\n");
+
       await sunmiPrinterPlugin.setFontSize(15.0);
       await sunmiPrinterPlugin.printTextLF("Texto com fonte de tamanho 15");
       await sunmiPrinterPlugin.setFontSize(20.0);
@@ -45,8 +43,12 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.printTextLF("Texto alinhado à direita");
       await sunmiPrinterPlugin.setAlignment(0);
       await sunmiPrinterPlugin.printTextLF("Texto alinhado à esquerda");
-      await sunmiPrinterPlugin.printTextLF("Pulei uma linha");
+      await sunmiPrinterPlugin.printText("Pulei uma linha");
       await sunmiPrinterPlugin.lineWrap(1);
+
+      await sunmiPrinterPlugin.setFontSize(20.0);
+      await sunmiPrinterPlugin.printText("Texto sem quebra de linha ");
+      await sunmiPrinterPlugin.printText("Outro texto sem quebra de linha\n");
       await sunmiPrinterPlugin.cutPaper();
     }
 
