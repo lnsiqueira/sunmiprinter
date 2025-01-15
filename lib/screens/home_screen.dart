@@ -1,11 +1,12 @@
-import 'package:demosunmiprinter/sunmiprinterplugin.dart';
-import 'package:demosunmiprinter/widgets/button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../utils/sunmiprinterstate.dart';
+import 'package:demosunmiprinter/sunmiprinterplugin.dart';
+import 'package:demosunmiprinter/widgets/button.dart';
+import 'package:demosunmiprinter/utils/sunmiprinterstate.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
