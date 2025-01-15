@@ -57,22 +57,21 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text("Imprimir Teste"),
             CustomButton(
-              text: "Imprimir Teste",
               onPressed: onClickButtonImprimirTeste,
               icon: Icon(Icons.print),
             ),
+            Text("Imprimir QrCode"),
             CustomButton(
-                text: "Imprimir QrCode",
                 onPressed: onClickButtonImprimirQrCode,
                 icon: Icon(Icons.qr_code)),
-
+            Text("Imprimir Código de Barras"),
             CustomButton(
-                text: "Imprimir Código de Barras",
                 onPressed: onClickButtonImprimirCodigoDeBarras,
-                icon: Icon(Icons.bar_chart)),
+                icon: Icon(MdiIcons.barcode)),
+            Text("Imprimir Imagem"),
             CustomButton(
-                text: "Imagem",
                 onPressed: onClickButtonImprimirImagem,
                 icon: Icon(Icons.image)),
           ],
