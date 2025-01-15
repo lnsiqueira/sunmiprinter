@@ -62,11 +62,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     void onClickButtonImprimirCodigoDeBarras() async {
       await sunmiPrinterPlugin.printBarCode("1234567890", 8, 100, 2, 1);
-      await sunmiPrinterPlugin.cutPaper();
     }
 
     void onClickButtonImprimirTeste() async {
-
       await sunmiPrinterPlugin.setFontSize(15.0);
       await sunmiPrinterPlugin.printTextLF("Texto com fonte de tamanho 15");
       await sunmiPrinterPlugin.setFontSize(20.0);
@@ -87,15 +85,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
       await sunmiPrinterPlugin.setFontSize(20.0);
       await sunmiPrinterPlugin.printText("Texto sem quebra de linha ");
-      await sunmiPrinterPlugin.printText("Outro texto sem quebra de linha\n");
-      await sunmiPrinterPlugin.cutPaper();
+      await sunmiPrinterPlugin.printText("Outro texto sem quebra de linha\n\n");
     }
 
     void onClickButtonImprimirQrCode() async {
       String qrCode =
           "Projeto ACBr Consultoria S.A\n" + "https://www.projetoacbr.com.br";
       await sunmiPrinterPlugin.printQRCode(qrCode, 8, 1);
-      await sunmiPrinterPlugin.cutPaper();
     }
 
     void onClickButtonImprimirImagem() async {
@@ -119,6 +115,10 @@ class _MyHomePageState extends State<MyHomePage> {
           msg: mensagem,
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM);
+    }
+
+    void onClickButtonCortarPapel() async {
+      await sunmiPrinterPlugin.cutPaper();
     }
 
     return Scaffold(
@@ -147,6 +147,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Button(
                 onPressed: onClickButtonImprimirImagem,
                 icon: Icon(Icons.image)),
+            Text("Cortar papel"),
+            Button(
+                onPressed: onClickButtonCortarPapel,
+                icon: Icon(Icons.cut)),
             Text("Estado da impressora"),
             Button(
                 onPressed: onClickButtonEstadoImpressora,
