@@ -305,7 +305,7 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
     private void handleSetPrintTextWithFont(MethodCall call, MethodChannel.Result result) {
         try {
             String text = call.argument("text");
-            float fontSize = call.argument("fontSize");
+            float fontSize = ((Double) call.argument("fontSize")).floatValue();
             String typeface = call.argument("typeface");
             sunmiPrinter.printTextWithFont(text, typeface, fontSize);
             result.success(true);
@@ -336,7 +336,7 @@ public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.M
 
     private void handleSetFontSize(MethodCall call, MethodChannel.Result result) {
         try {
-            int fontSize = call.argument("fontSize");
+            float fontSize  =  ((Double) call.argument("fontSize")).floatValue();
             sunmiPrinter.setFontSize(fontSize);
             result.success(true);
         } catch (Exception e) {

@@ -113,7 +113,7 @@ class SunmiPrinterPlugin {
     }
   }
 
-  Future<void> setFontSize(Float fontSize) async {
+  Future<void> setFontSize(double fontSize) async {
     try {
       await _channel.invokeMethod('setFontSize', {"fontSize":fontSize });
     } on PlatformException catch (e) {
@@ -137,7 +137,7 @@ class SunmiPrinterPlugin {
     }
   }
 
-  Future<void> printTextWithFont(String text, String typeface, Float fontSize) async {
+  Future<void> printTextWithFont(String text, String typeface, double fontSize) async {
     try {
       await _channel.invokeMethod('printTextWithFont', {"text":text, "typeface":typeface, "fontSize":fontSize });
     } on PlatformException catch (e) {
