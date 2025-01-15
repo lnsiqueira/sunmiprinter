@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 
-class  CustomButton extends StatelessWidget {
+class  Button extends StatelessWidget {
   final VoidCallback  onPressed;
   final Icon icon;
 
-  CustomButton({required this.onPressed, required this.icon});
+  Button({required this.onPressed, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class  CustomButton extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
 
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(10.0),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -1,5 +1,5 @@
 import 'package:demosunmiprinter/sunmiprinterplugin.dart';
-import 'package:demosunmiprinter/widgets/custom_button.dart';
+import 'package:demosunmiprinter/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -118,24 +118,24 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text("Imprimir Teste"),
-            CustomButton(
+            Button(
               onPressed: onClickButtonImprimirTeste,
               icon: Icon(Icons.print),
             ),
             Text("Imprimir QrCode"),
-            CustomButton(
+            Button(
                 onPressed: onClickButtonImprimirQrCode,
                 icon: Icon(Icons.qr_code)),
             Text("Imprimir Código de Barras"),
-            CustomButton(
+            Button(
                 onPressed: onClickButtonImprimirCodigoDeBarras,
                 icon: Icon(MdiIcons.barcode)),
             Text("Imprimir Imagem"),
-            CustomButton(
+            Button(
                 onPressed: onClickButtonImprimirImagem,
                 icon: Icon(Icons.image)),
             Text("Estado da impressora"),
-            CustomButton(
+            Button(
                 onPressed: onClickButtonEstadoImpressora,
                 icon: Icon(Icons.print)),
           ],
