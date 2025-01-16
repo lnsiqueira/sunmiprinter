@@ -60,6 +60,13 @@ class _MyHomePageState extends State<MyHomePage> {
       return mensagem;
     }
 
+    void imprimeInformacoesDaSunmiPrinter() async {
+      final  modal = await sunmiPrinterPlugin.getPrinterModal();
+      final serviceVersion = await sunmiPrinterPlugin.getServiceVersion();
+      final basicSunmiPrintInfo = "modal:" + modal  + "service version: "+ serviceVersion +"\n";
+      await sunmiPrinterPlugin.printText(basicSunmiPrintInfo);
+    }
+
     void onClickButtonImprimirCodigoDeBarras() async {
       await sunmiPrinterPlugin.printBarCode("1234567890", 8, 100, 2, 1);
     }
@@ -86,6 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.setFontSize(20.0);
       await sunmiPrinterPlugin.printText("Texto sem quebra de linha ");
       await sunmiPrinterPlugin.printText("Outro texto sem quebra de linha\n\n");
+      imprimeInformacoesDaSunmiPrinter();
     }
 
     void onClickButtonImprimirQrCode() async {
@@ -124,6 +132,8 @@ class _MyHomePageState extends State<MyHomePage> {
     void onClickButtonPularLinha() async {
       await sunmiPrinterPlugin.lineWrap(1);
     }
+
+
 
     // Matriz com widgets de botões e labels
     final List<List<Widget>> widgetGroup = [
