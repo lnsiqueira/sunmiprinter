@@ -73,9 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
      * Imprime informações da impressora Sunmi
      */
     void imprimeInformacoesDaSunmiPrinter() async {
-      final  modal = await sunmiPrinterPlugin.getPrinterModal();
+      final modal = await sunmiPrinterPlugin.getPrinterModal();
       final serviceVersion = await sunmiPrinterPlugin.getServiceVersion();
-      final basicSunmiPrintInfo = "modal:" + modal  + "service version: "+ serviceVersion +"\n";
+      final basicSunmiPrintInfo =
+          "modal:" + modal + "service version: " + serviceVersion + "\n";
       await sunmiPrinterPlugin.printText(basicSunmiPrintInfo);
     }
 
