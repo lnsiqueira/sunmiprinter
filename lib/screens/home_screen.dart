@@ -121,6 +121,10 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.cutPaper();
     }
 
+    void onClickButtonPularLinha() async {
+      await sunmiPrinterPlugin.lineWrap(1);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -147,10 +151,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Button(
                 onPressed: onClickButtonImprimirImagem,
                 icon: Icon(Icons.image)),
+            Text("Pular linha"),
+            Button(
+                onPressed: onClickButtonPularLinha,
+                icon: Icon(Icons.arrow_downward)),
             Text("Cortar papel"),
             Button(
                 onPressed: onClickButtonCortarPapel,
                 icon: Icon(Icons.cut)),
+
+
             Text("Estado da impressora"),
             Button(
                 onPressed: onClickButtonEstadoImpressora,
