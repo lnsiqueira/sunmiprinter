@@ -1,6 +1,5 @@
-import 'package:demosunmiprinter/sunmiprinterplugin.dart';
-import 'package:flutter/material.dart';
 import 'package:demosunmiprinter/screens/home_screen.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
