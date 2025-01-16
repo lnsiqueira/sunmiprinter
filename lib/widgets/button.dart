@@ -21,9 +21,14 @@ class  Button extends StatelessWidget {
           .colorScheme
           .onPrimary,
       padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+      shape: CircleBorder(
+        side: BorderSide(
+          color: Theme
+              .of(context)
+              .colorScheme
+              .primary,
+          width: 5.0,
+        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

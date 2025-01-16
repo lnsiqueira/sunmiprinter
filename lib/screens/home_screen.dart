@@ -125,49 +125,53 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.lineWrap(1);
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("Imprimir Teste"),
-            Button(
-              onPressed: onClickButtonImprimirTeste,
-              icon: Icon(Icons.print),
-            ),
-            Text("Imprimir QrCode"),
-            Button(
-                onPressed: onClickButtonImprimirQrCode,
-                icon: Icon(Icons.qr_code)),
-            Text("Imprimir Código de Barras"),
-            Button(
-                onPressed: onClickButtonImprimirCodigoDeBarras,
-                icon: Icon(MdiIcons.barcode)),
-            Text("Imprimir Imagem"),
-            Button(
-                onPressed: onClickButtonImprimirImagem,
-                icon: Icon(Icons.image)),
-            Text("Pular linha"),
-            Button(
-                onPressed: onClickButtonPularLinha,
-                icon: Icon(Icons.arrow_downward)),
-            Text("Cortar papel"),
-            Button(
-                onPressed: onClickButtonCortarPapel,
-                icon: Icon(Icons.cut)),
-
-
-            Text("Estado da impressora"),
-            Button(
-                onPressed: onClickButtonEstadoImpressora,
-                icon: Icon(Icons.print)),
-          ],
+    final List<List<Widget>> widgetGroup = [
+      [
+        Button(
+          onPressed: onClickButtonImprimirTeste,
+          icon: Icon(Icons.print),
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        Button(
+            onPressed: onClickButtonImprimirQrCode, icon: Icon(Icons.qr_code)),
+        Button(
+            onPressed: onClickButtonImprimirCodigoDeBarras,
+            icon: Icon(MdiIcons.barcode)),
+      ],
+      [
+        Text("Imprimir Teste"),
+        Text("Imprimir QrCode"),
+        Text("Código de Barras"),
+      ],
+      [
+        Button(onPressed: onClickButtonImprimirImagem, icon: Icon(Icons.image)),
+        Button(
+            onPressed: onClickButtonPularLinha,
+            icon: Icon(Icons.arrow_downward)),
+        Button(onPressed: onClickButtonCortarPapel, icon: Icon(Icons.cut)),
+      ],
+      [Text("Imprimir Imagem"), Text("Pular linha"), Text("Cortar papel")],
+    ];
+
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
+        body: Center(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 5,
+                children: widgetGroup.map((row) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: row,
+                  );
+                }).toList()) // This trailing comma makes auto-formatting nicer for build methods.
+            ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          onPressed: onClickButtonEstadoImpressora,
+          child: Icon(Icons.info, color: Theme.of(context).colorScheme.onPrimary),
+        ));
   }
 }
