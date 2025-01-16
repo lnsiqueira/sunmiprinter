@@ -125,20 +125,27 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.lineWrap(1);
     }
 
+    // Matriz com widgets de botões e labels
     final List<List<Widget>> widgetGroup = [
       [
         Button(
-          onPressed: onClickButtonImprimirTeste,
-          icon: Icon(Icons.text_snippet),
-        ),
-        Button(onPressed: onClickButtonImprimirQrCode, icon: Icon(Icons.qr_code)),
-        Button(onPressed: onClickButtonImprimirCodigoDeBarras, icon: Icon(MdiIcons.barcode)),
+            onPressed: onClickButtonImprimirTeste,
+            icon: Icon(Icons.text_snippet)),
+        Button(
+            onPressed: onClickButtonImprimirQrCode, icon: Icon(Icons.qr_code)),
+        Button(
+            onPressed: onClickButtonImprimirCodigoDeBarras,
+            icon: Icon(MdiIcons.barcode)),
       ],
       [
-        Text("Imprimir Teste"), Text("Imprimir QrCode"), Text("Código de Barras"),
+        Text("Imprimir Teste"),
+        Text("Imprimir QrCode"),
+        Text("Código de Barras"),
       ],
       [
-        Button(onPressed: onClickButtonPularLinha, icon: Icon(Icons.arrow_downward)),
+        Button(
+            onPressed: onClickButtonPularLinha,
+            icon: Icon(Icons.arrow_downward)),
         Button(onPressed: onClickButtonImprimirImagem, icon: Icon(Icons.image)),
         Button(onPressed: onClickButtonCortarPapel, icon: Icon(Icons.cut)),
       ],

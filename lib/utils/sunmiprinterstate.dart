@@ -1,4 +1,4 @@
-enum SunmiPrinterState {
+enum SuniPrinterState {
   OK,
   INITIALIZING,
   ERROR,
