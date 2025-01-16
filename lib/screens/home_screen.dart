@@ -16,13 +16,22 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+/**
+ * Classe que implementa a tela principal do aplicativo
+ */
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final sunmiPrinterPlugin = SunmiPrinterPlugin();
 
-    String buildMensagemDeEstadoDaImpressora(
-        SunmiPrinterState estadoImpressora) {
+    /* Funções auxiliares para obter informações da impressora*/
+
+    /**
+     * Retorna uma mensagem de acordo com o estado da impressora
+     */
+
+    String buildMensagemDeEstadoDaImpressora( SunmiPrinterState estadoImpressora) {
       String mensagem = "";
 
       switch (estadoImpressora) {
@@ -60,12 +69,17 @@ class _MyHomePageState extends State<MyHomePage> {
       return mensagem;
     }
 
+    /**
+     * Imprime informações da impressora Sunmi
+     */
     void imprimeInformacoesDaSunmiPrinter() async {
       final  modal = await sunmiPrinterPlugin.getPrinterModal();
       final serviceVersion = await sunmiPrinterPlugin.getServiceVersion();
       final basicSunmiPrintInfo = "modal:" + modal  + "service version: "+ serviceVersion +"\n";
       await sunmiPrinterPlugin.printText(basicSunmiPrintInfo);
     }
+
+    /* Funções onClick de botões*/
 
     void onClickButtonImprimirCodigoDeBarras() async {
       await sunmiPrinterPlugin.printBarCode("1234567890", 8, 100, 2, 1);
@@ -132,8 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
     void onClickButtonPularLinha() async {
       await sunmiPrinterPlugin.lineWrap(1);
     }
-
-
 
     // Matriz com widgets de botões e labels
     final List<List<Widget>> widgetGroup = [
