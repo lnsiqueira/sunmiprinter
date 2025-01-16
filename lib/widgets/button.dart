@@ -20,7 +20,7 @@ class  Button extends StatelessWidget {
           .of(context)
           .colorScheme
           .onPrimary,
-      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       shape: CircleBorder(
         side: BorderSide(
           color: Theme

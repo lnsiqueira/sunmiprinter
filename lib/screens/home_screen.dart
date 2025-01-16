@@ -129,27 +129,20 @@ class _MyHomePageState extends State<MyHomePage> {
       [
         Button(
           onPressed: onClickButtonImprimirTeste,
-          icon: Icon(Icons.print),
+          icon: Icon(Icons.text_snippet),
         ),
-        Button(
-            onPressed: onClickButtonImprimirQrCode, icon: Icon(Icons.qr_code)),
-        Button(
-            onPressed: onClickButtonImprimirCodigoDeBarras,
-            icon: Icon(MdiIcons.barcode)),
+        Button(onPressed: onClickButtonImprimirQrCode, icon: Icon(Icons.qr_code)),
+        Button(onPressed: onClickButtonImprimirCodigoDeBarras, icon: Icon(MdiIcons.barcode)),
       ],
       [
-        Text("Imprimir Teste"),
-        Text("Imprimir QrCode"),
-        Text("Código de Barras"),
+        Text("Imprimir Teste"), Text("Imprimir QrCode"), Text("Código de Barras"),
       ],
       [
+        Button(onPressed: onClickButtonPularLinha, icon: Icon(Icons.arrow_downward)),
         Button(onPressed: onClickButtonImprimirImagem, icon: Icon(Icons.image)),
-        Button(
-            onPressed: onClickButtonPularLinha,
-            icon: Icon(Icons.arrow_downward)),
         Button(onPressed: onClickButtonCortarPapel, icon: Icon(Icons.cut)),
       ],
-      [Text("Imprimir Imagem"), Text("Pular linha"), Text("Cortar papel")],
+      [Text("Saltar linha"), Text("Imprimir Imagem"), Text("Cortar papel")],
     ];
 
     return Scaffold(
@@ -164,14 +157,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: widgetGroup.map((row) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    spacing: 5,
                     children: row,
                   );
                 }).toList()) // This trailing comma makes auto-formatting nicer for build methods.
             ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          onPressed: onClickButtonEstadoImpressora,
-          child: Icon(Icons.info, color: Theme.of(context).colorScheme.onPrimary),
-        ));
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            onPressed: onClickButtonEstadoImpressora,
+            child: Icon(Icons.info,
+                color: Theme.of(context).colorScheme.onPrimary)));
   }
 }
