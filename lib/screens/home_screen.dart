@@ -51,13 +51,13 @@ class _MyHomePageState extends State<MyHomePage> {
           mensagem = "Impressora superaquecida";
           break;
         case SunmiPrinterState.COVERISOPEN:
-          mensagem = "Tampa aberta";
+          mensagem = "Impressora com tampa aberta";
           break;
         case SunmiPrinterState.CUTTERABNORMAL:
-          mensagem = "Cortador anormal";
+          mensagem = "Impressora com erro no cortador";
           break;
         case SunmiPrinterState.CUTTERNORMAL:
-          mensagem = "Cortador normal";
+          mensagem = "Impressora com recuo no cortador";
           break;
         case SunmiPrinterState.BLACKMARKNOTFOUND:
           mensagem = "Marcador preto não encontrado";
