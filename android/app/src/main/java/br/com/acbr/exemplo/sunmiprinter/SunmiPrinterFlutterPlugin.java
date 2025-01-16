@@ -12,7 +12,9 @@ import io.flutter.plugin.common.MethodChannel;
 
 import com.tectoy.sunmiprinter.SunmiPrinter;
 
-
+/**
+ * SunmiPrinterFlutterPlugin é uma classe que implementa a interface FlutterPlugin para o SunmiPrinter.
+ */
 public class SunmiPrinterFlutterPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler {
 
     private Context context;

@@ -1,8 +1,9 @@
-import 'dart:ffi';
-import 'dart:ui';
 import 'package:demosunmiprinter/utils/sunmiprinterstate.dart';
 import 'package:flutter/services.dart';
-import 'dart:developer' as developer;
+
+/**
+ * SunmiPrinterPlugin é uma classe que expõe ao Flutter  o serviço de impressão da Sunmi.
+ */
 class SunmiPrinterPlugin {
 
   static const MethodChannel _channel = MethodChannel('br.com.acbr.exemplo.sunmiprinterplugin');

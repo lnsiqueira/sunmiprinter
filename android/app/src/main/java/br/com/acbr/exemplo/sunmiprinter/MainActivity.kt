@@ -7,6 +7,7 @@ import br.com.acbr.exemplo.sunmiprinter.SunmiPrinterFlutterPlugin
 class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        // Adiciona o plugin SunmiPrinterFlutterPlugin
         flutterEngine.plugins.add(SunmiPrinterFlutterPlugin())
     }
 }
