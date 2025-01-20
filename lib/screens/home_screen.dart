@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tectoy_sunmiprinter/tectoy_sunmiprinter.dart';
+import 'package:tectoy_sunmiprinter/utils/sunmiprinterstate.dart';
 
-import 'package:demosunmiprinter/sunmiprinterplugin.dart';
-import 'package:demosunmiprinter/widgets/button.dart';
-import 'package:demosunmiprinter/utils/sunmiprinterstate.dart';
+import '../widgets/button.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -23,7 +23,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final sunmiPrinterPlugin = SunmiPrinterPlugin();
+    final sunmiPrinterPlugin = TectoySunmiprinter();
 
     /* Funções auxiliares para obter informações da impressora*/
 

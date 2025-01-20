@@ -1,12 +1,15 @@
-import 'package:demosunmiprinter/utils/sunmiprinterstate.dart';
+
 import 'package:flutter/services.dart';
+import 'package:tectoy_sunmiprinter/utils/sunmiprinterstate.dart';
 
-/**
- * SunmiPrinterPlugin é uma classe que expõe ao Flutter  o serviço de impressão da Sunmi.
- */
-class SunmiPrinterPlugin {
+import 'tectoy_sunmiprinter_platform_interface.dart';
 
-  static const MethodChannel _channel = MethodChannel('br.com.acbr.exemplo.sunmiprinterplugin');
+class TectoySunmiprinter {
+  Future<String?> getPlatformVersion() {
+    return TectoySunmiprinterPlatform.instance.getPlatformVersion();
+  }
+
+  static const MethodChannel _channel = MethodChannel('com.tectoy.tectoy_sunmiprinter.TectoySunmiprinterPlugin');
 
   static const int SUNMI_PRINTERSTATUS_OK = 1;
   static const int SUNMI_PRINTERSTATUS_INITIALIZING = 2;
@@ -213,8 +216,8 @@ class SunmiPrinterPlugin {
    * Imprime um Bitmap
    * @param bitmap um array (Uint8List é um byte[] em Java) com os dados da imagem
    */
- Future<void>printBitmap(Uint8List bitmap) async{
-  try {
+  Future<void>printBitmap(Uint8List bitmap) async{
+    try {
       await _channel.invokeMethod('printBitmap', {"bitmap":bitmap });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir bitmap: ${e.message}';

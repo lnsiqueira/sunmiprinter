@@ -36,7 +36,8 @@ dependencies:
   bitmap: ^0.2.0
   flutter_material_design_icons: ^1.1.7447
   fluttertoast: ^8.0.9
-
+  tectoy_sunmiprinter:
+    path: ./tectoy_sunmiprinter
 dev_dependencies:
   flutter_test:
     sdk: flutter
