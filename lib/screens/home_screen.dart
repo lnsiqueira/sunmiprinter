@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tectoy_sunmiprinter/tectoy_sunmiprinter.dart';
 import 'package:tectoy_sunmiprinter/utils/sunmiprinterstate.dart';
-
-import '../widgets/button.dart';
+import 'package:demosunmiprinter/widgets/button.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
