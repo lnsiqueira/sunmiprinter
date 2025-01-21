@@ -41,10 +41,6 @@ android {
             minifyEnabled false
         }
     }
-
-    dependencies {
-        implementation(files('./libs/tectoy.jar'))
-    }
 }
 
 flutter {
