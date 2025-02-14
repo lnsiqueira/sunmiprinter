@@ -30,7 +30,7 @@ public class TectoySunmiprinterPlugin implements FlutterPlugin, MethodChannel.Me
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-
+    channel.setMethodCallHandler(null);
   }
 
   @Override
