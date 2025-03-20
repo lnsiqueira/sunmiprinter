@@ -1,4 +1,4 @@
-# Demo SunmiPrinter #
+# Tectoy SunmiPrinter #
 
 <p align="center">
 <img src=screenshots/tela-inicial-app.png  width="200"/>
@@ -7,7 +7,7 @@
 
 Sobre
 ---
-DemoSunmiPrinter é um aplicativo Android feito em Flutter que utiliza o serviço de impressão SunmiPrinter.</br>
+TectoySunmiprinter é em Flutter Plugin que utiliza o serviço de impressão SunmiPrinter.</br>
 
  Funcionalidades
 ---
@@ -22,9 +22,10 @@ DemoSunmiPrinter é um aplicativo Android feito em Flutter que utiliza o serviç
 Getting Started
 ---
 
-Executando projeto 
+Executando programa Exemplo
 
 ```bash
+cd example
 flutter run
 ```
 
