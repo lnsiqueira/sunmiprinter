@@ -95,10 +95,8 @@ class TectoySunmiprinter {
    */
   Future<void>cutPaper() async {
     try {
-        await Future.wait([
-          _channel.invokeMethod('cutPaper'),
-          Future.delayed(Duration(seconds: 1))
-        ]);
+        await _channel.invokeMethod('cutPaper');
+
     } on PlatformException catch (e) {
       throw  'Erro ao cortar papel: ${e.message}';
     }
