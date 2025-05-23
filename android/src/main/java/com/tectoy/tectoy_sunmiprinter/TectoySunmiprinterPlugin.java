@@ -284,6 +284,7 @@ public class TectoySunmiprinterPlugin implements FlutterPlugin, MethodChannel.Me
       byte[] bitMapData = call.argument("bitmap");
       Bitmap bitmap = BitmapFactory.decodeByteArray(bitMapData, 0, bitMapData.length);
       sunmiPrinter.printBitmap(bitmap);
+      sunmiPrinter.printText("\n");
       result.success(true);
     } catch (Exception e) {
       result.error("Erro ao imprimir bitmap", e.getMessage(), e);
