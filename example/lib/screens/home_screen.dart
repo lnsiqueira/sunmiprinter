@@ -1,10 +1,10 @@
+import 'package:demosunmiprinter/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tectoy_sunmiprinter/tectoy_sunmiprinter.dart';
 import 'package:tectoy_sunmiprinter/utils/sunmiprinterstate.dart';
-import 'package:demosunmiprinter/widgets/button.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -119,9 +119,17 @@ class _MyHomePageState extends State<MyHomePage> {
     void onClickButtonImprimirImagem() async {
       //obs: a imagem deve ser um arquivo bmp
       final data = await rootBundle.load('assets/images/logo.bmp');
-      await sunmiPrinterPlugin.printText("Exemplo de impressão de imagem\n");
-      await sunmiPrinterPlugin.printBitmap(data.buffer.asUint8List());
-      await sunmiPrinterPlugin.printText("\n");
+      final data2 = await rootBundle.load('assets/images/nfe-logo.bmp');
+      try {
+        await Future.wait([
+          sunmiPrinterPlugin.printText("Exemplo de impressão de imagem\n"),
+          sunmiPrinterPlugin.printBitmap(data.buffer.asUint8List()),
+          sunmiPrinterPlugin.printBitmap(data2.buffer.asUint8List()),
+          sunmiPrinterPlugin.cutPaper()
+        ]);
+      } catch (e) {
+        debugPrint("Erro ao imprimir imagem: $e");
+      }
     }
 
     void onClickButtonEstadoImpressora() async {
