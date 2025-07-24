@@ -155,54 +155,153 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.lineWrap(1);
     }
 
-    // Matriz com widgets de botões e labels
-    final List<List<Widget>> widgetGroup = [
-      [
-        Button(
-            onPressed: onClickButtonImprimirTeste,
-            icon: Icon(Icons.text_snippet)),
-        Button(
-            onPressed: onClickButtonImprimirQrCode, icon: Icon(Icons.qr_code)),
-        Button(
-            onPressed: onClickButtonImprimirCodigoDeBarras,
-            icon: Icon(MdiIcons.barcode)),
-      ],
-      [
-        Text("Imprimir Teste"),
-        Text("Imprimir QrCode"),
-        Text("Código de Barras"),
-      ],
-      [
-        Button(
-            onPressed: onClickButtonPularLinha,
-            icon: Icon(Icons.arrow_downward)),
-        Button(onPressed: onClickButtonImprimirImagem, icon: Icon(Icons.image)),
-        Button(onPressed: onClickButtonCortarPapel, icon: Icon(Icons.cut)),
-      ],
-      [Text("Saltar linha"), Text("Imprimir Imagem"), Text("Cortar papel")],
+    void onClickButtonAbrirGaveta() async {
+      await sunmiPrinterPlugin.openDrawer();
+    }
+
+    // Lista de itens do grid
+    final List<Map<String, dynamic>> gridItems = [
+      {
+        'title': 'Imprimir Teste',
+        'icon': Icons.text_snippet,
+        'onPressed': onClickButtonImprimirTeste,
+      },
+      {
+        'title': 'Imprimir QrCode',
+        'icon': Icons.qr_code,
+        'onPressed': onClickButtonImprimirQrCode,
+      },
+      {
+        'title': 'Código de Barras',
+        'icon': MdiIcons.barcode,
+        'onPressed': onClickButtonImprimirCodigoDeBarras,
+      },
+      {
+        'title': 'Saltar linha',
+        'icon': Icons.arrow_downward,
+        'onPressed': onClickButtonPularLinha,
+      },
+      {
+        'title': 'Imprimir Imagem',
+        'icon': Icons.image,
+        'onPressed': onClickButtonImprimirImagem,
+      },
+      {
+        'title': 'Cortar papel',
+        'icon': Icons.cut,
+        'onPressed': onClickButtonCortarPapel,
+      },
+      {
+        'title': 'Abrir Gaveta',
+        'icon': Icons.money,
+        'onPressed': onClickButtonAbrirGaveta,
+      },
     ];
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              Theme.of(context).colorScheme.surface,
+            ],
+          ),
         ),
-        body: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 5,
-                children: widgetGroup.map((row) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    spacing: 5,
-                    children: row,
-                  );
-                }).toList()) // This trailing comma makes auto-formatting nicer for build methods.
-            ),
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            onPressed: onClickButtonEstadoImpressora,
-            child: Icon(Icons.info,
-                color: Theme.of(context).colorScheme.onPrimary)));
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Header com título
+              Container(
+                padding: const EdgeInsets.all(20),
+                child: Text(
+                  widget.title,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ),
+              
+              // Grid de botões
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: _getCrossAxisCount(context),
+                      childAspectRatio: 0.8,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                    ),
+                    itemCount: gridItems.length,
+                    itemBuilder: (context, index) {
+                      final item = gridItems[index];
+                      return _buildGridItem(
+                        context,
+                        item['title'],
+                        item['icon'],
+                        item['onPressed'],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: onClickButtonEstadoImpressora,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        icon: const Icon(Icons.info_outline),
+        label: const Text('Status'),
+        elevation: 8,
+      ),
+    );
+  }
+
+  // Função para determinar o número de colunas baseado no tamanho da tela
+  int _getCrossAxisCount(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    if (width > 600) {
+      return 4; // Tablet landscape
+    } else if (width > 400) {
+      return 3; // Tablet portrait / Phone landscape
+    } else {
+      return 2; // Phone portrait
+    }
+  }
+
+  // Widget para construir cada item do grid
+  Widget _buildGridItem(
+    BuildContext context,
+    String title,
+    IconData icon,
+    VoidCallback onPressed,
+  ) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Button(
+          onPressed: onPressed,
+          icon: Icon(icon),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
+    );
   }
 }
