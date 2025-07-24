@@ -20,9 +20,8 @@ class MyHomePage extends StatefulWidget {
  */
 
 class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    final sunmiPrinterPlugin = TectoySunmiprinter();
+  
+  final sunmiPrinterPlugin = TectoySunmiprinter();
 
     /* Funções auxiliares para obter informações da impressora*/
 
@@ -159,44 +158,94 @@ class _MyHomePageState extends State<MyHomePage> {
       await sunmiPrinterPlugin.openDrawer();
     }
 
+
+    // Função para determinar o número de colunas baseado no tamanho da tela
+  int _getCrossAxisCount(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    if (width > 600) {
+      return 4; // Tablet landscape
+    } else if (width > 400) {
+      return 3; // Tablet portrait / Phone landscape
+    } else {
+      return 2; // Phone portrait
+    }
+  }
+
+  // Widget para construir cada item do grid
+  Widget _buildGridItem(
+    BuildContext context,
+    String title,
+    IconData icon,
+    VoidCallback onPressed,
+  ) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Button(
+          onPressed: onPressed,
+          icon: Icon(icon),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
+    );
+  }
+
+
     // Lista de itens do grid
+    
+
+  @override
+  Widget build(BuildContext context) {
+
     final List<Map<String, dynamic>> gridItems = [
       {
         'title': 'Imprimir Teste',
         'icon': Icons.text_snippet,
-        'onPressed': onClickButtonImprimirTeste,
+        'onPressed': this.onClickButtonImprimirTeste,
       },
       {
         'title': 'Imprimir QrCode',
         'icon': Icons.qr_code,
-        'onPressed': onClickButtonImprimirQrCode,
+        'onPressed': this.onClickButtonImprimirQrCode,
       },
       {
         'title': 'Código de Barras',
         'icon': MdiIcons.barcode,
-        'onPressed': onClickButtonImprimirCodigoDeBarras,
+        'onPressed': this.onClickButtonImprimirCodigoDeBarras,
       },
       {
         'title': 'Saltar linha',
         'icon': Icons.arrow_downward,
-        'onPressed': onClickButtonPularLinha,
+        'onPressed': this.onClickButtonPularLinha,
       },
       {
         'title': 'Imprimir Imagem',
         'icon': Icons.image,
-        'onPressed': onClickButtonImprimirImagem,
+        'onPressed': this.onClickButtonImprimirImagem,
       },
       {
         'title': 'Cortar papel',
         'icon': Icons.cut,
-        'onPressed': onClickButtonCortarPapel,
+        'onPressed': this.onClickButtonCortarPapel,
       },
       {
         'title': 'Abrir Gaveta',
         'icon': Icons.money,
-        'onPressed': onClickButtonAbrirGaveta,
+        'onPressed': this.onClickButtonAbrirGaveta,
       },
     ];
+
+    
 
     return Scaffold(
       body: Container(
@@ -264,44 +313,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  // Função para determinar o número de colunas baseado no tamanho da tela
-  int _getCrossAxisCount(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    if (width > 600) {
-      return 4; // Tablet landscape
-    } else if (width > 400) {
-      return 3; // Tablet portrait / Phone landscape
-    } else {
-      return 2; // Phone portrait
-    }
-  }
-
-  // Widget para construir cada item do grid
-  Widget _buildGridItem(
-    BuildContext context,
-    String title,
-    IconData icon,
-    VoidCallback onPressed,
-  ) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Button(
-          onPressed: onPressed,
-          icon: Icon(icon),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          title,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w500,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-          textAlign: TextAlign.center,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ],
-    );
-  }
+  
 }
