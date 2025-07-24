@@ -304,6 +304,10 @@ class TectoySunmiprinter {
     }
   }
 
+  /**
+   * Abre a gaveta da impressora
+   * @throws PlatformException se ocorrer um erro ao chamar o método nativo
+   */
   Future<void>openDrawer() async {
     try {
       await _channel.invokeMethod('openDrawer');
