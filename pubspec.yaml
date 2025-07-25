@@ -1,7 +1,7 @@
 name: tectoy_sunmiprinter
 description: "A Flutter plugin for Sunmi printers"
 version: 0.1.0
-homepage:
+ 
 
 environment:
   sdk: ^3.6.0

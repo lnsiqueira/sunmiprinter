@@ -1,7 +1,5 @@
-
 import 'package:flutter/services.dart';
 import 'package:tectoy_sunmiprinter/utils/sunmiprinterstate.dart';
-
 import 'tectoy_sunmiprinter_platform_interface.dart';
 
 class TectoySunmiprinter {
@@ -9,7 +7,8 @@ class TectoySunmiprinter {
     return TectoySunmiprinterPlatform.instance.getPlatformVersion();
   }
 
-  static const MethodChannel _channel = MethodChannel('com.tectoy.tectoy_sunmiprinter.TectoySunmiprinterPlugin');
+  static const MethodChannel _channel =
+      MethodChannel('com.tectoy.tectoy_sunmiprinter.TectoySunmiprinterPlugin');
 
   static const int SUNMI_PRINTERSTATUS_OK = 1;
   static const int SUNMI_PRINTERSTATUS_INITIALIZING = 2;
@@ -93,12 +92,11 @@ class TectoySunmiprinter {
   /**
    * Corta o papel
    */
-  Future<void>cutPaper() async {
+  Future<void> cutPaper() async {
     try {
-        await _channel.invokeMethod('cutPaper');
-
+      await _channel.invokeMethod('cutPaper');
     } on PlatformException catch (e) {
-      throw  'Erro ao cortar papel: ${e.message}';
+      throw 'Erro ao cortar papel: ${e.message}';
     }
   }
 
@@ -106,9 +104,9 @@ class TectoySunmiprinter {
    * Pula linhas
    * @param numLines - número de linhas a serem puladas
    */
-  Future <void>lineWrap(int numLines) async {
+  Future<void> lineWrap(int numLines) async {
     try {
-      await _channel.invokeMethod('lineWrap', {"numLines":numLines });
+      await _channel.invokeMethod('lineWrap', {"numLines": numLines});
     } on PlatformException catch (e) {
       throw 'Erro ao saltar linhas: ${e.message}';
     }
@@ -118,7 +116,7 @@ class TectoySunmiprinter {
    * Envia dados brutos para a impressora
    * @param data - array de bytes
    */
-  Future<void>sendRAWData(Uint8List data) async {
+  Future<void> sendRAWData(Uint8List data) async {
     try {
       await _channel.invokeMethod('sendRAWData', data);
     } on PlatformException catch (e) {
@@ -133,9 +131,9 @@ class TectoySunmiprinter {
    * 1  - Centro
    * 2 - Direita
    */
-  Future<void>setAlignment(int alignment) async {
+  Future<void> setAlignment(int alignment) async {
     try {
-      await _channel.invokeMethod('setAlignment', {"alignment":alignment });
+      await _channel.invokeMethod('setAlignment', {"alignment": alignment});
     } on PlatformException catch (e) {
       throw 'Erro ao configurar o alinhamento: ${e.message}';
     }
@@ -145,9 +143,9 @@ class TectoySunmiprinter {
    * Seta o nome da fonte
    * @param typeface - nome da fonte
    */
-  Future<void>setFontName(String typeface) async {
+  Future<void> setFontName(String typeface) async {
     try {
-      await _channel.invokeMethod('setFontName', {"typeface":typeface });
+      await _channel.invokeMethod('setFontName', {"typeface": typeface});
     } on PlatformException catch (e) {
       throw 'Erro ao configurar o nome da fonte: ${e.message}';
     }
@@ -159,7 +157,7 @@ class TectoySunmiprinter {
    */
   Future<void> setFontSize(double fontSize) async {
     try {
-      await _channel.invokeMethod('setFontSize', {"fontSize":fontSize });
+      await _channel.invokeMethod('setFontSize', {"fontSize": fontSize});
     } on PlatformException catch (e) {
       throw 'Erro ao configurar o tamanho da fonte: ${e.message}';
     }
@@ -171,7 +169,7 @@ class TectoySunmiprinter {
    */
   Future<void> printText(String text) async {
     try {
-      await _channel.invokeMethod('printText', {"text":text });
+      await _channel.invokeMethod('printText', {"text": text});
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir texto: ${e.message}';
     }
@@ -183,7 +181,7 @@ class TectoySunmiprinter {
    */
   Future<void> printTextLF(String text) async {
     try {
-      await _channel.invokeMethod('printTextLF', {"text":text });
+      await _channel.invokeMethod('printTextLF', {"text": text});
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir texto com LF: ${e.message}';
     }
@@ -195,19 +193,24 @@ class TectoySunmiprinter {
    * @param typeface - nome da fonte
    * @param fontSize - tamanho da fonte
    */
-  Future<void> printTextWithFont(String text, String typeface, double fontSize) async {
+  Future<void> printTextWithFont(
+      String text, String typeface, double fontSize) async {
     try {
-      await _channel.invokeMethod('printTextWithFont', {"text":text, "typeface":typeface, "fontSize":fontSize });
+      await _channel.invokeMethod('printTextWithFont',
+          {"text": text, "typeface": typeface, "fontSize": fontSize});
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir texto com fonte: ${e.message}';
     }
   }
 
-
-
-  Future<void> printColumnsText(List<String> colsTextArr, List<int> colsWidthArr, List<int> colsAlign) async {
+  Future<void> printColumnsText(List<String> colsTextArr,
+      List<int> colsWidthArr, List<int> colsAlign) async {
     try {
-      await _channel.invokeMethod('printColumnsText', {"colsTextArr":colsTextArr, "colsWidthArr":colsWidthArr, "colsAlign":colsAlign });
+      await _channel.invokeMethod('printColumnsText', {
+        "colsTextArr": colsTextArr,
+        "colsWidthArr": colsWidthArr,
+        "colsAlign": colsAlign
+      });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir colunas de texto: ${e.message}';
     }
@@ -217,13 +220,14 @@ class TectoySunmiprinter {
    * Imprime um Bitmap
    * @param bitmap um array (Uint8List é um byte[] em Java) com os dados da imagem
    */
-  Future<void>printBitmap(Uint8List bitmap) async{
+  Future<void> printBitmap(Uint8List bitmap) async {
     try {
-      await _channel.invokeMethod('printBitmap', {"bitmap":bitmap });
+      await _channel.invokeMethod('printBitmap', {"bitmap": bitmap});
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir bitmap: ${e.message}';
     }
   }
+
   Future<int> getCutPaperTimes() async {
     try {
       final int cutPaperTimes = await _channel.invokeMethod('getCutPaperTimes');
@@ -250,9 +254,16 @@ class TectoySunmiprinter {
    * @param width - Largura do código de barras, intervalo de 2 a 6, padrão = 2
    * @param textPosition  - Posição do texto Padrão = 2
    */
-  Future<void>printBarCode(String data, int symbology, int height, int width, int textPosition) async {
+  Future<void> printBarCode(String data, int symbology, int height, int width,
+      int textPosition) async {
     try {
-      await _channel.invokeMethod('printBarCode',{ "data":data, "symbology":symbology, "height":height, "width":width, "textposition":textPosition });
+      await _channel.invokeMethod('printBarCode', {
+        "data": data,
+        "symbology": symbology,
+        "height": height,
+        "width": width,
+        "textposition": textPosition
+      });
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir código de barras: ${e.message}';
     }
@@ -264,23 +275,24 @@ class TectoySunmiprinter {
    * @param moduleSize - Tamanho do módulo, o valor é de 1 a 16,
    * @param errorLevel - Nível de correção de erro, o valor é de 1 a 4
    */
-  Future<void>printQRCode(String data, int moduleSize, int errorLevel) async {
+  Future<void> printQRCode(String data, int moduleSize, int errorLevel) async {
     try {
-      await _channel.invokeMethod('printQRCode', {"data":data, "modulesize":moduleSize, "errorlevel":errorLevel });
+      await _channel.invokeMethod('printQRCode',
+          {"data": data, "modulesize": moduleSize, "errorlevel": errorLevel});
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir código QR: ${e.message}';
     }
   }
 
-  Future<void>printOriginalText(String text) async {
+  Future<void> printOriginalText(String text) async {
     try {
-      await _channel.invokeMethod('printOriginalText', {"text":text });
+      await _channel.invokeMethod('printOriginalText', {"text": text});
     } on PlatformException catch (e) {
       throw 'Erro ao imprimir texto original: ${e.message}';
     }
   }
 
-  Future<void>commitPrinterBuffer() async {
+  Future<void> commitPrinterBuffer() async {
     try {
       await _channel.invokeMethod('commitPrinterBuffer');
     } on PlatformException catch (e) {
@@ -288,17 +300,17 @@ class TectoySunmiprinter {
     }
   }
 
-  Future<void>enterPrinterBuffer(bool clean) async {
+  Future<void> enterPrinterBuffer(bool clean) async {
     try {
-      await _channel.invokeMethod('enterPrinterBuffer', {"clean":clean });
+      await _channel.invokeMethod('enterPrinterBuffer', {"clean": clean});
     } on PlatformException catch (e) {
       throw 'Erro ao entrar no buffer da impressora: ${e.message}';
     }
   }
 
-  Future<void>exitPrinterBuffer(bool commit) async {
+  Future<void> exitPrinterBuffer(bool commit) async {
     try {
-      await _channel.invokeMethod('exitPrinterBuffer', {"commit":commit });
+      await _channel.invokeMethod('exitPrinterBuffer', {"commit": commit});
     } on PlatformException catch (e) {
       throw 'Erro ao sair do buffer da impressora: ${e.message}';
     }
@@ -308,7 +320,7 @@ class TectoySunmiprinter {
    * Abre a gaveta da impressora
    * @throws PlatformException se ocorrer um erro ao chamar o método nativo
    */
-  Future<void>openDrawer() async {
+  Future<void> openDrawer() async {
     try {
       await _channel.invokeMethod('openDrawer');
     } on PlatformException catch (e) {
@@ -316,16 +328,17 @@ class TectoySunmiprinter {
     }
   }
 
-  Future<int>getOpenDrawerTimes() async {
+  Future<int> getOpenDrawerTimes() async {
     try {
-      final int openDrawerTimes = await _channel.invokeMethod('getOpenDrawerTimes');
+      final int openDrawerTimes =
+          await _channel.invokeMethod('getOpenDrawerTimes');
       return openDrawerTimes;
     } on PlatformException catch (e) {
       throw 'Erro ao obter o número de vezes que a gaveta foi aberta: ${e.message}';
     }
   }
 
-  Future<int>getPrinterMode() async {
+  Future<int> getPrinterMode() async {
     try {
       final int printerMode = await _channel.invokeMethod('getPrinterMode');
       return printerMode;
@@ -334,25 +347,27 @@ class TectoySunmiprinter {
     }
   }
 
-  Future<int>getPrinterBBMDistance() async {
+  Future<int> getPrinterBBMDistance() async {
     try {
-      final int printerBBMDistance = await _channel.invokeMethod('getPrinterBBMDistance');
+      final int printerBBMDistance =
+          await _channel.invokeMethod('getPrinterBBMDistance');
       return printerBBMDistance;
     } on PlatformException catch (e) {
       throw 'Erro ao obter o status mais recente da impressora: ${e.message}';
     }
   }
 
-  Future<int>updatePrinterState() async {
+  Future<int> updatePrinterState() async {
     try {
-      final int printerState = await _channel.invokeMethod('updatePrinterState');
+      final int printerState =
+          await _channel.invokeMethod('updatePrinterState');
       return printerState;
     } on PlatformException catch (e) {
       throw 'Erro ao atualizar o estado da impressora: ${e.message}';
     }
   }
 
-  Future<bool>getDrawerStatus() async {
+  Future<bool> getDrawerStatus() async {
     try {
       final bool drawerStatus = await _channel.invokeMethod('getDrawerStatus');
       return drawerStatus;
